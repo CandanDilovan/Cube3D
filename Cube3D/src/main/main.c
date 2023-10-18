@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/18 13:25:46 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/18 15:10:17 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,20 @@ static void	ft_paint_ray(t_map *g_map)
 {
 	int	a;
 
-	a = -1;
+	a = 0;
 	if (g_map->player->ray)
 		mlx_delete_image(g_map->mlx, g_map->player->ray);
-	g_map->player->ray = mlx_new_image(g_map->mlx, 1, 12);
-	while (++a < 12)
+	g_map->player->ray = mlx_new_image(g_map->mlx,
+			(g_map->widht * TILE_SIZE), (g_map->height * TILE_SIZE));
+	while (a < 60)
 	{
-		ft_printf(" x : %d\n", g_map->player->x);
-		mlx_put_pixel(g_map->player->ray, 1,
-			a, 0xFFFFFF);
+		mlx_put_pixel(g_map->player->ray, g_map->player->x,
+			g_map->player->y, 0xFFFFFF);
+		g_map->player->x += g_map->player->dx;
+		g_map->player->y += g_map->player->dy;
+		a++;
 	}
-	mlx_image_to_window(g_map->mlx, g_map->player->ray, 100, 100);
+	mlx_image_to_window(g_map->mlx, g_map->player->ray, 0, 0);
 	ft_printf("1");
 }
 
@@ -115,14 +118,13 @@ static void	ft_paint_player(t_map *g_map)
 	int			y;
 
 	y = -1;
-	g_map->img = mlx_new_image(g_map->mlx, 13, 12);
+	g_map->img = mlx_new_image(g_map->mlx, 13, 120);
 	while (++y < 12)
 	{
 		x = -1;
 		while (++x < 13)
-			mlx_put_pixel(g_map->img, x, y, 0xFF00FF);
+			mlx_put_pixel(g_map->img, x, y, 0x00FFFFFF);
 	}
-	ft_paint_ray(g_map);
 	mlx_image_to_window(g_map->mlx, g_map->img, 100, 100);
 }
 
