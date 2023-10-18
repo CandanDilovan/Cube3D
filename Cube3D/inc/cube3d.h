@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:47:40 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/18 13:11:20 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/18 22:44:54 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <math.h>
-# define PI 3.141
+# define PI 3.141592653558209
 
 # define TILE_SIZE 64
 
@@ -42,6 +42,16 @@ typedef struct a_player
 	mlx_image_t	*ray;
 }				t_player;
 
+typedef struct a_walls
+{
+	double		cx;
+	double		cy;
+	double		cmx;
+	double		cmy;
+	uint32_t	mx;
+	uint32_t	my;
+	double		northkorea;
+}				t_walls;
 
 typedef struct a_map
 {
@@ -60,6 +70,7 @@ typedef struct a_map
 	t_texture	*texture;
 	mlx_image_t	*img;
 	t_player	*player;
+	t_walls		*walls;
 }				t_map;
 
 //map
@@ -76,5 +87,10 @@ int		ft_textures(t_map *g_map);
 
 //print_error
 int		ft_return_error(char *str);
+
+//rays
+void	ft_check_walls_ud(t_map *g_map);
+void	ft_check_walls_lr(t_map *g_map);
+void	ft_lowest(t_map *g_map);
 
 #endif

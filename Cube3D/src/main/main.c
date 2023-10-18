@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/18 15:10:17 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/19 01:00:25 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 static void	ft_paint_ray(t_map *g_map)
 {
-	int	a;
+	uint32_t	a;
 
-	a = 0;
+	a = sqrt((g_map->player->y - g_map->walls->cy) *(g_map->player->y - g_map->walls->cy) + ((g_map->player->x - g_map->walls->cx) * (g_map->player->x - g_map->walls->cx)));
 	if (g_map->player->ray)
 		mlx_delete_image(g_map->mlx, g_map->player->ray);
 	g_map->player->ray = mlx_new_image(g_map->mlx,
 			(g_map->widht * TILE_SIZE), (g_map->height * TILE_SIZE));
-	while (a < 60)
+	while (a > 0)
 	{
-		mlx_put_pixel(g_map->player->ray, g_map->player->x,
-			g_map->player->y, 0xFFFFFF);
+		mlx_put_pixel(g_map->player->ray, g_map->player->x + 6,
+			g_map->player->y + 6, 0xFFFFFF);
 		g_map->player->x += g_map->player->dx;
 		g_map->player->y += g_map->player->dy;
-		a++;
+		a--;
 	}
+	ft_printf("ici ? \n");
 	mlx_image_to_window(g_map->mlx, g_map->player->ray, 0, 0);
-	ft_printf("1");
 }
 
 void	ft_move(void *param)
@@ -52,6 +52,10 @@ void	ft_move(void *param)
 				g_map->player->pa += 2 * PI;
 			g_map->player->dx = cos(g_map->player->pa) * 2;
 			g_map->player->dy = sin(g_map->player->pa) * 2;
+			g_map->player->x = g_map->img->instances[0].x;
+			g_map->player->y = g_map->img->instances[0].y;
+			ft_lowest(g_map);
+			ft_paint_ray(g_map);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A)
 			&& !mlx_is_key_down(m, MLX_KEY_W) && !mlx_is_key_down(m, MLX_KEY_S))
@@ -61,6 +65,10 @@ void	ft_move(void *param)
 				g_map->player->pa -= 2 * PI;
 			g_map->player->dx = cos(g_map->player->pa) * 2;
 			g_map->player->dy = sin(g_map->player->pa) * 2;
+			g_map->player->x = g_map->img->instances[0].x;
+			g_map->player->y = g_map->img->instances[0].y;
+			ft_lowest(g_map);
+			ft_paint_ray(g_map);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_S) && !mlx_is_key_down(m, MLX_KEY_W)
 			&& !mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A))
@@ -69,6 +77,7 @@ void	ft_move(void *param)
 			g_map->img->instances[0].y -= g_map->player->dy;
 			g_map->player->x = g_map->img->instances[0].x;
 			g_map->player->y = g_map->img->instances[0].y;
+			ft_lowest(g_map);
 			ft_paint_ray(g_map);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_W) && !mlx_is_key_down(m, MLX_KEY_S)
@@ -78,6 +87,7 @@ void	ft_move(void *param)
 			g_map->img->instances[0].y += g_map->player->dy;
 			g_map->player->x = g_map->img->instances[0].x;
 			g_map->player->y = g_map->img->instances[0].y;
+			ft_lowest(g_map);
 			ft_paint_ray(g_map);
 		}
 	}
@@ -171,6 +181,7 @@ int	main(int argc, char **argv)
 		if (!g_map)
 			return (-1);
 		g_map->player = malloc(sizeof(t_player));
+		g_map->walls = malloc(sizeof(t_walls));
 		if (map_count(g_map, argv[1]) == -1 || ft_int_map(g_map) == -1)
 			return (free(g_map), ft_return_error("Error : FD failed"));
 		if (ft_no_void(g_map) == -1)
@@ -178,6 +189,7 @@ int	main(int argc, char **argv)
 		// if (ft_textures(g_map) == -1)
 			// return (-1);
 		//ft_print_intmap(g_map);
+		g_map->player->pa = PI;
 		g_map->player->dx = cos(g_map->player->pa) * 2;
 		g_map->player->dy = sin(g_map->player->pa) * 2;
 	}
