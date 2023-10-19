@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:18:21 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/19 11:38:30 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/19 11:59:27 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ static int	ft_check_all_walls(t_map *g_map, int y)
 	int	prout;
 
 	prout = g_map->height * g_map->widht;
-	g_map->walls->mx = (int)g_map->walls->cx / prout;
-	g_map->walls->my = (int)g_map->walls->cy / prout;
+	prout++;
+	g_map->walls->mx = (int)g_map->walls->cx / 64;
+	g_map->walls->my = (int)g_map->walls->cy / 64;
 	if (g_map->walls->mx < g_map->widht && g_map->walls->my < g_map->height
 		&& g_map->walls->mx > 0 && g_map->walls->my > 0
 		&& g_map->int_map[g_map->walls->my][g_map->walls->mx] == 1)
@@ -86,6 +87,7 @@ void	ft_lowest(t_map *g_map)
 {
 	double	tempx;
 	double	tempy;
+	double	kimjongun;
 
 	g_map->walls->northkorea = 1000000;
 	ft_check_walls_ud(g_map);
@@ -95,14 +97,15 @@ void	ft_lowest(t_map *g_map)
 			((g_map->player->x - tempx) * (g_map->player->x - tempx))
 			+ ((g_map->player->y - tempy) * (g_map->player->y - tempy)));
 	ft_check_walls_lr(g_map);
-	if (g_map->walls->northkorea < sqrt(((g_map->player->x - g_map->walls->cx)
+	kimjongun = sqrt(((g_map->player->x - g_map->walls->cx)
 				* (g_map->player->x - g_map->walls->cx))
 			+ ((g_map->player->y - g_map->walls->cy)
-				* (g_map->player->y - g_map->walls->cy))))
+				* (g_map->player->y - g_map->walls->cy)));
+	if (g_map->walls->northkorea < kimjongun)
 	{
 		g_map->walls->cx = tempx;
 		g_map->walls->cy = tempy;
 	}
-	ft_printf("up down my : %d\n", g_map->walls->my);
-	ft_printf("up down mx : %d\n", g_map->walls->mx);
+	ft_printf("lowest my : %d\n", g_map->walls->my);
+	ft_printf("lowest mx : %d\n", g_map->walls->mx);
 }

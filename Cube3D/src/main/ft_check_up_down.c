@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:22:17 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/19 11:38:24 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/19 11:59:48 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ static int	ft_check_all_walls(t_map *g_map, int y)
 	int	prout;
 
 	prout = g_map->height * g_map->widht;
-	g_map->walls->mx = g_map->walls->cx / prout;
-	g_map->walls->my = g_map->walls->cy / prout;
+	prout++;
+	g_map->walls->mx = g_map->walls->cx / 64;
+	g_map->walls->my = g_map->walls->cy / 64;
 	if (g_map->walls->mx < g_map->widht && g_map->walls->my < g_map->height
 		&& g_map->walls->mx > 0 && g_map->walls->my > 0
 		&& g_map->int_map[g_map->walls->my][g_map->walls->mx] == 1)
