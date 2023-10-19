@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/19 01:00:25 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/19 11:13:41 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_paint_ray(t_map *g_map)
 {
 	uint32_t	a;
 
-	a = sqrt((g_map->player->y - g_map->walls->cy) *(g_map->player->y - g_map->walls->cy) + ((g_map->player->x - g_map->walls->cx) * (g_map->player->x - g_map->walls->cx)));
+	a = sqrt((g_map->walls->cy - g_map->player->y) * (g_map->walls->cy - g_map->player->y) + ((g_map->walls->cx - g_map->player->x) * (g_map->walls->cx - g_map->player->x)));
 	if (g_map->player->ray)
 		mlx_delete_image(g_map->mlx, g_map->player->ray);
 	g_map->player->ray = mlx_new_image(g_map->mlx,
@@ -73,8 +73,8 @@ void	ft_move(void *param)
 		if (mlx_is_key_down(m, MLX_KEY_S) && !mlx_is_key_down(m, MLX_KEY_W)
 			&& !mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A))
 		{
-			g_map->img->instances[0].x -= g_map->player->dx;
-			g_map->img->instances[0].y -= g_map->player->dy;
+			g_map->img->instances[0].x -= (int32_t)g_map->player->dx;
+			g_map->img->instances[0].y -= (int32_t)g_map->player->dy;
 			g_map->player->x = g_map->img->instances[0].x;
 			g_map->player->y = g_map->img->instances[0].y;
 			ft_lowest(g_map);
@@ -83,8 +83,8 @@ void	ft_move(void *param)
 		if (mlx_is_key_down(m, MLX_KEY_W) && !mlx_is_key_down(m, MLX_KEY_S)
 			&& !mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A))
 		{
-			g_map->img->instances[0].x += g_map->player->dx;
-			g_map->img->instances[0].y += g_map->player->dy;
+			g_map->img->instances[0].x += (int32_t)g_map->player->dx;
+			g_map->img->instances[0].y += (int32_t)g_map->player->dy;
 			g_map->player->x = g_map->img->instances[0].x;
 			g_map->player->y = g_map->img->instances[0].y;
 			ft_lowest(g_map);

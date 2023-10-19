@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:18:21 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/19 01:10:53 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/19 11:38:30 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int	ft_check_all_walls(t_map *g_map, int y)
 	prout = g_map->height * g_map->widht;
 	g_map->walls->mx = (int)g_map->walls->cx / prout;
 	g_map->walls->my = (int)g_map->walls->cy / prout;
-	ft_printf("left right my : %d\n", g_map->walls->my);
-	ft_printf("left right mx : %d\n", g_map->walls->mx);
-	if (g_map->int_map[g_map->walls->my][g_map->walls->mx] == 1)
+	if (g_map->walls->mx < g_map->widht && g_map->walls->my < g_map->height
+		&& g_map->walls->mx > 0 && g_map->walls->my > 0
+		&& g_map->int_map[g_map->walls->my][g_map->walls->mx] == 1)
 	{
 		y = g_map->height;
 		return (y);
@@ -103,4 +103,6 @@ void	ft_lowest(t_map *g_map)
 		g_map->walls->cx = tempx;
 		g_map->walls->cy = tempy;
 	}
+	ft_printf("up down my : %d\n", g_map->walls->my);
+	ft_printf("up down mx : %d\n", g_map->walls->mx);
 }

@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:22:17 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/19 00:52:42 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/19 11:38:24 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,17 @@ static int	ft_check_all_walls(t_map *g_map, int y)
 	prout = g_map->height * g_map->widht;
 	g_map->walls->mx = g_map->walls->cx / prout;
 	g_map->walls->my = g_map->walls->cy / prout;
-	ft_printf("up down my : %d\n", g_map->walls->my);
-	ft_printf("up down mx : %d\n", g_map->walls->mx);
-	if (g_map->int_map[g_map->walls->my][g_map->walls->mx] == 1)
+	if (g_map->walls->mx < g_map->widht && g_map->walls->my < g_map->height
+		&& g_map->walls->mx > 0 && g_map->walls->my > 0
+		&& g_map->int_map[g_map->walls->my][g_map->walls->mx] == 1)
 	{
 		y = g_map->height;
 		return (y);
 	}
 	else
 	{
+		ft_printf("up down cmy : %d\n", (int)g_map->walls->cmy);
+		ft_printf("up down cmx : %d\n", (int)g_map->walls->cmx);
 		g_map->walls->cx += g_map->walls->cmx;
 		g_map->walls->cy += g_map->walls->cmy;
 		y++;
