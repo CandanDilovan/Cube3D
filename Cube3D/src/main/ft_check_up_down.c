@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:22:17 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/19 11:59:48 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/19 13:06:36 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	ft_walls_ope(t_map *g_map, double ratan, double ra)
 		g_map->walls->cy = (((int)g_map->player->y / 64) * 64) - 0.0001;
 		g_map->walls->cx = (g_map->player->y - g_map->walls->cy)
 			* ratan + g_map->player->x;
-		g_map->walls->cmy = -64;
+		g_map->walls->cmy = 1;
 		g_map->walls->cmx = -g_map->walls->cmy * ratan;
 	}
 	if (ra > PI)

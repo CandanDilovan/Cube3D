@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:18:21 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/19 11:59:27 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/19 13:13:23 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	ft_walls_ope(t_map *g_map, double negtan, double ra)
 		g_map->walls->cx = (((int)g_map->player->x / 64) * 64) - 0.0001;
 		g_map->walls->cy = (g_map->player->x - g_map->walls->cx)
 			* negtan + g_map->player->y;
-		g_map->walls->cmx = -64;
+		g_map->walls->cmx = 1;
 		g_map->walls->cmy = -g_map->walls->cmx * negtan;
 	}
 	if (ra < (PI / 2) || ra > (3 * PI / 2))
@@ -91,12 +91,16 @@ void	ft_lowest(t_map *g_map)
 
 	g_map->walls->northkorea = 1000000;
 	ft_check_walls_ud(g_map);
+	ft_printf("ud my : %d\n", g_map->walls->my);
+	ft_printf("ud mx : %d\n", g_map->walls->mx);
 	tempx = g_map->walls->cx;
 	tempy = g_map->walls->cy;
 	g_map->walls->northkorea = sqrt(
 			((g_map->player->x - tempx) * (g_map->player->x - tempx))
 			+ ((g_map->player->y - tempy) * (g_map->player->y - tempy)));
 	ft_check_walls_lr(g_map);
+	ft_printf("lr my : %d\n", g_map->walls->my);
+	ft_printf("lr mx : %d\n", g_map->walls->mx);
 	kimjongun = sqrt(((g_map->player->x - g_map->walls->cx)
 				* (g_map->player->x - g_map->walls->cx))
 			+ ((g_map->player->y - g_map->walls->cy)
@@ -106,6 +110,4 @@ void	ft_lowest(t_map *g_map)
 		g_map->walls->cx = tempx;
 		g_map->walls->cy = tempy;
 	}
-	ft_printf("lowest my : %d\n", g_map->walls->my);
-	ft_printf("lowest mx : %d\n", g_map->walls->mx);
 }

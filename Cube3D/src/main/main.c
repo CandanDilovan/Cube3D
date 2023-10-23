@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/19 11:46:49 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/19 13:13:38 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static void	ft_paint_ray(t_map *g_map)
 		g_map->player->y += g_map->player->dy;
 		a--;
 	}
-	ft_printf("ici ? \n");
+	ft_printf("lowest my : %d\n", g_map->walls->my);
+	ft_printf("lowest mx : %d\n", g_map->walls->mx);
 	mlx_image_to_window(g_map->mlx, g_map->player->ray, 0, 0);
 }
 
