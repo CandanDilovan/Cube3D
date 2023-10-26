@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/19 13:13:38 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/26 14:01:43 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,29 @@
 static void	ft_paint_ray(t_map *g_map)
 {
 	double	a;
+	double	x;
+	double	y;
 
-	a = sqrt((g_map->player->y - g_map->walls->cy)
-			* (g_map->player->y - g_map->walls->cy)
-			+ ((g_map->player->x - g_map->walls->cx)
-				* (g_map->player->x - g_map->walls->cx)));
+	//ft_printf("&");
+	// a = sqrt(((g_map->walls->sdx)
+	// 			* (g_map->walls->sdx))
+	// 		+ ((g_map->walls->sdy)
+	// 			* (g_map->walls->sdy)));
+	x = (int)g_map->player->x;
+	y = (int)g_map->player->y;
 	if (g_map->player->ray)
 		mlx_delete_image(g_map->mlx, g_map->player->ray);
 	g_map->player->ray = mlx_new_image(g_map->mlx,
 			(g_map->widht * TILE_SIZE), (g_map->height * TILE_SIZE));
+	a = 100;
 	while (a > 0)
 	{
-		mlx_put_pixel(g_map->player->ray, g_map->player->x + 6,
-			g_map->player->y + 6, 0xFFFFFF);
-		g_map->player->x += g_map->player->dx;
-		g_map->player->y += g_map->player->dy;
+		mlx_put_pixel(g_map->player->ray, (x + 6),
+			(y + 6), 0xFFFFFF);
+		x += g_map->player->deltax;
+		y += g_map->player->deltay;
 		a--;
 	}
-	ft_printf("lowest my : %d\n", g_map->walls->my);
-	ft_printf("lowest mx : %d\n", g_map->walls->mx);
 	mlx_image_to_window(g_map->mlx, g_map->player->ray, 0, 0);
 }
 
@@ -54,11 +58,8 @@ void	ft_move(void *param)
 			g_map->player->pa -= 0.01;
 			if (g_map->player->pa < 0)
 				g_map->player->pa += 2 * PI;
-			g_map->player->dx = cos(g_map->player->pa) * 2;
-			g_map->player->dy = sin(g_map->player->pa) * 2;
-			g_map->player->x = g_map->img->instances[0].x;
-			g_map->player->y = g_map->img->instances[0].y;
-			ft_lowest(g_map);
+			g_map->player->deltax = cos(g_map->player->pa) * 2;
+			g_map->player->deltay = sin(g_map->player->pa) * 2;
 			ft_paint_ray(g_map);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A)
@@ -67,31 +68,28 @@ void	ft_move(void *param)
 			g_map->player->pa += 0.01;
 			if (g_map->player->pa > 2 * PI)
 				g_map->player->pa -= 2 * PI;
-			g_map->player->dx = cos(g_map->player->pa) * 2;
-			g_map->player->dy = sin(g_map->player->pa) * 2;
-			g_map->player->x = g_map->img->instances[0].x;
-			g_map->player->y = g_map->img->instances[0].y;
-			ft_lowest(g_map);
+			g_map->player->deltax = cos(g_map->player->pa) * 2;
+			g_map->player->deltay = sin(g_map->player->pa) * 2;
 			ft_paint_ray(g_map);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_S) && !mlx_is_key_down(m, MLX_KEY_W)
 			&& !mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A))
 		{
-			g_map->img->instances[0].x -= (int32_t)g_map->player->dx;
-			g_map->img->instances[0].y -= (int32_t)g_map->player->dy;
-			g_map->player->x = g_map->img->instances[0].x;
-			g_map->player->y = g_map->img->instances[0].y;
-			ft_lowest(g_map);
+			g_map->img->instances[0].x = g_map->player->x;
+			g_map->img->instances[0].y = g_map->player->y;
+			g_map->player->x -= g_map->player->deltax;
+			g_map->player->y -= g_map->player->deltay;
+			ft_check_walls_ud(g_map);
 			ft_paint_ray(g_map);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_W) && !mlx_is_key_down(m, MLX_KEY_S)
 			&& !mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A))
 		{
-			g_map->img->instances[0].x += (int32_t)g_map->player->dx;
-			g_map->img->instances[0].y += (int32_t)g_map->player->dy;
-			g_map->player->x = g_map->img->instances[0].x;
-			g_map->player->y = g_map->img->instances[0].y;
-			ft_lowest(g_map);
+			g_map->img->instances[0].x = g_map->player->x;
+			g_map->img->instances[0].y = g_map->player->y;
+			g_map->player->x += g_map->player->deltax;
+			g_map->player->y += g_map->player->deltay;
+			ft_check_walls_ud(g_map);
 			ft_paint_ray(g_map);
 		}
 	}
@@ -132,14 +130,15 @@ static void	ft_paint_player(t_map *g_map)
 	int			y;
 
 	y = -1;
-	g_map->img = mlx_new_image(g_map->mlx, 13, 120);
+	g_map->img = mlx_new_image(g_map->mlx, 13, 12);
 	while (++y < 12)
 	{
 		x = -1;
 		while (++x < 13)
 			mlx_put_pixel(g_map->img, x, y, 0x00FFFFFF);
 	}
-	mlx_image_to_window(g_map->mlx, g_map->img, 100, 100);
+	mlx_image_to_window(g_map->mlx, g_map->img,
+		(g_map->player->x * TILE_SIZE), (g_map->player->y * TILE_SIZE));
 }
 
 // static void	ft_print_intmap(t_map *g_map)
@@ -193,9 +192,15 @@ int	main(int argc, char **argv)
 		// if (ft_textures(g_map) == -1)
 			// return (-1);
 		//ft_print_intmap(g_map);
-		g_map->player->pa = PI;
-		g_map->player->dx = cos(g_map->player->pa) * 2;
-		g_map->player->dy = sin(g_map->player->pa) * 2;
+		g_map->player->x = 1.5;
+		g_map->player->y = 1.5;
+		g_map->player->pa = 0;
+		g_map->player->avionx = 0;
+		g_map->player->avionx = 0.66;
+		g_map->player->dirx = -1;
+		g_map->player->diry = 0;
+		g_map->player->deltax = cos(g_map->player->pa) * 2;
+		g_map->player->deltay = sin(g_map->player->pa) * 2;
 	}
 	ft_set_map(g_map);
 	mlx_loop_hook(g_map->mlx, ft_move, g_map);

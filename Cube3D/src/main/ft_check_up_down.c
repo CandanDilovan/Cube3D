@@ -6,80 +6,85 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:22:17 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/19 13:06:36 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/26 14:08:11 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-static int	ft_check_all_walls(t_map *g_map, int y)
+static void	ft_dda(t_map *g_map)
 {
-	int	prout;
+	int	is_wall;
 
-	prout = g_map->height * g_map->widht;
-	prout++;
-	g_map->walls->mx = g_map->walls->cx / 64;
-	g_map->walls->my = g_map->walls->cy / 64;
-	if (g_map->walls->mx < g_map->widht && g_map->walls->my < g_map->height
-		&& g_map->walls->mx > 0 && g_map->walls->my > 0
-		&& g_map->int_map[g_map->walls->my][g_map->walls->mx] == 1)
+	is_wall = 0;
+	while (is_wall == 0)
 	{
-		y = g_map->height;
-		return (y);
+		if (g_map->walls->sdx < g_map->walls->sdy)
+		{
+			g_map->walls->sdx += g_map->walls->ddx;
+			g_map->walls->mx += g_map->walls->stepx;
+		}
+		else
+		{
+			g_map->walls->sdy += g_map->walls->ddy;
+			g_map->walls->my += g_map->walls->stepy;
+		}
+		if (g_map->map[g_map->walls->my][g_map->walls->mx] == '1')
+		{
+			is_wall = 1;
+			ft_printf("mapx = %d\n", g_map->walls->mx);
+			ft_printf("mapy = %d\n", g_map->walls->my);
+			ft_printf("is_wall = %d\n", is_wall);
+		}
+	}
+}
+
+static void	ft_find_wall(t_map *g_map, double ddx, double ddy)
+{
+	if (g_map->player->pa > PI)
+	{
+		g_map->walls->stepx = -1;
+		g_map->walls->sdx = (g_map->player->x - g_map->walls->mx) * ddx;
 	}
 	else
 	{
-		ft_printf("up down cmy : %d\n", (int)g_map->walls->cmy);
-		ft_printf("up down cmx : %d\n", (int)g_map->walls->cmx);
-		g_map->walls->cx += g_map->walls->cmx;
-		g_map->walls->cy += g_map->walls->cmy;
-		y++;
-		return (y);
+		g_map->walls->stepx = 1;
+		g_map->walls->sdx = (g_map->player->x + 1.0 - g_map->walls->mx) * ddx;
+	}
+	if (g_map->player->pa < PI)
+	{
+		g_map->walls->stepy = -1;
+		g_map->walls->stepy = (g_map->player->y - g_map->walls->my) * ddy;
+	}
+	else
+	{
+		g_map->walls->stepy = 1;
+		g_map->walls->sdy = (g_map->player->y + 1.0 - g_map->walls->my) * ddy;
 	}
 }
 
-static void	ft_walls_ope(t_map *g_map, double ratan, double ra)
-{
-	if (ra < PI)
-	{
-		g_map->walls->cy = (((int)g_map->player->y / 64) * 64) - 0.0001;
-		g_map->walls->cx = (g_map->player->y - g_map->walls->cy)
-			* ratan + g_map->player->x;
-		g_map->walls->cmy = 1;
-		g_map->walls->cmx = -g_map->walls->cmy * ratan;
-	}
-	if (ra > PI)
-	{
-		g_map->walls->cy = (((int)g_map->player->y / 64) * 64) + 64;
-		g_map->walls->cx = (g_map->player->y - g_map->walls->cy)
-			* ratan + g_map->player->x;
-		g_map->walls->cmy = 64;
-		g_map->walls->cmx = -g_map->walls->cmy * ratan;
-	}
-}
-
-void	ft_check_walls_ud(t_map *g_map)
+int	ft_check_walls_ud(t_map *g_map)
 {
 	double		ra;
-	double		ratan;
 	int			r;
-	uint32_t	y;
 
 	r = -1;
 	ra = g_map->player->pa;
-	ratan = -1 / tan(ra);
 	while (++r < 1)
 	{
-		y = 0;
+		g_map->walls->mx = (int)g_map->player->x;
+		g_map->walls->my = (int)g_map->player->y;
 		if (ra < PI || ra > PI)
-			ft_walls_ope(g_map, ratan, ra);
-		else if (ra == 0 || ra == PI)
 		{
-			g_map->walls->cx = g_map->player->x;
-			g_map->walls->cy = g_map->player->y;
-			y = g_map->height;
+			g_map->walls->ddx = sqrt(1 + (g_map->player->deltay
+						* g_map->player->deltay)
+					/ (g_map->player->deltax * g_map->player->deltax));
+			g_map->walls->ddy = sqrt(1 + (g_map->player->deltax
+						* g_map->player->deltax)
+					/ (g_map->player->deltay * g_map->player->deltay));
+			ft_find_wall(g_map, g_map->walls->ddx, g_map->walls->ddy);
+			ft_dda(g_map);
 		}
-		while (y < g_map->height)
-			y = ft_check_all_walls(g_map, y);
 	}
+	return (0);
 }

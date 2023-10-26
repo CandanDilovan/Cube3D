@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:47:40 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/18 22:44:54 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/26 13:35:55 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,26 @@ typedef struct a_player
 {
 	double		x;
 	double		y;
-	double		dx;
-	double		dy;
+	double		deltax;
+	double		deltay;
+	double		dirx;
+	double		diry;
+	double		avionx;
+	double		aviony;
 	double		pa;
 	mlx_image_t	*ray;
 }				t_player;
 
 typedef struct a_walls
 {
-	double		cx;
-	double		cy;
-	double		cmx;
-	double		cmy;
+	int			stepx;
+	int			stepy;
+	double		sdx;
+	double		sdy;
+	double		ddx;
+	double		ddy;
 	uint32_t	mx;
 	uint32_t	my;
-	double		northkorea;
 }				t_walls;
 
 typedef struct a_map
@@ -89,8 +94,7 @@ int		ft_textures(t_map *g_map);
 int		ft_return_error(char *str);
 
 //rays
-void	ft_check_walls_ud(t_map *g_map);
-void	ft_check_walls_lr(t_map *g_map);
+int		ft_check_walls_ud(t_map *g_map);
 void	ft_lowest(t_map *g_map);
 
 #endif
