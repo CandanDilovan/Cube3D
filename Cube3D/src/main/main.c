@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/26 14:01:43 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/26 18:40:15 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,23 @@ static void	ft_paint_ray(t_map *g_map)
 	double	y;
 
 	//ft_printf("&");
-	// a = sqrt(((g_map->walls->sdx)
-	// 			* (g_map->walls->sdx))
-	// 		+ ((g_map->walls->sdy)
-	// 			* (g_map->walls->sdy)));
-	x = (int)g_map->player->x;
-	y = (int)g_map->player->y;
+	a = sqrt(((g_map->walls->sdx)
+				* (g_map->walls->sdx))
+			+ ((g_map->walls->sdy)
+				* (g_map->walls->sdy)));
+	x = g_map->player->x * 64;
+	y = g_map->player->y * 64;
 	if (g_map->player->ray)
 		mlx_delete_image(g_map->mlx, g_map->player->ray);
 	g_map->player->ray = mlx_new_image(g_map->mlx,
 			(g_map->widht * TILE_SIZE), (g_map->height * TILE_SIZE));
-	a = 100;
+	a *= 64;
 	while (a > 0)
 	{
 		mlx_put_pixel(g_map->player->ray, (x + 6),
 			(y + 6), 0xFFFFFF);
-		x += g_map->player->deltax;
-		y += g_map->player->deltay;
+		x += g_map->player->deltax / 32;
+		y += g_map->player->deltay / 32;
 		a--;
 	}
 	mlx_image_to_window(g_map->mlx, g_map->player->ray, 0, 0);
@@ -58,8 +58,8 @@ void	ft_move(void *param)
 			g_map->player->pa -= 0.01;
 			if (g_map->player->pa < 0)
 				g_map->player->pa += 2 * PI;
-			g_map->player->deltax = cos(g_map->player->pa) * 2;
-			g_map->player->deltay = sin(g_map->player->pa) * 2;
+			g_map->player->deltax = cos(g_map->player->pa);
+			g_map->player->deltay = sin(g_map->player->pa);
 			ft_paint_ray(g_map);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A)
@@ -68,27 +68,27 @@ void	ft_move(void *param)
 			g_map->player->pa += 0.01;
 			if (g_map->player->pa > 2 * PI)
 				g_map->player->pa -= 2 * PI;
-			g_map->player->deltax = cos(g_map->player->pa) * 2;
-			g_map->player->deltay = sin(g_map->player->pa) * 2;
+			g_map->player->deltax = cos(g_map->player->pa);
+			g_map->player->deltay = sin(g_map->player->pa);
 			ft_paint_ray(g_map);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_S) && !mlx_is_key_down(m, MLX_KEY_W)
 			&& !mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A))
 		{
-			g_map->img->instances[0].x = g_map->player->x;
-			g_map->img->instances[0].y = g_map->player->y;
-			g_map->player->x -= g_map->player->deltax;
-			g_map->player->y -= g_map->player->deltay;
+			g_map->player->x -= g_map->player->deltax / 32;
+			g_map->player->y -= g_map->player->deltay / 32;
+			g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
+			g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
 			ft_check_walls_ud(g_map);
 			ft_paint_ray(g_map);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_W) && !mlx_is_key_down(m, MLX_KEY_S)
 			&& !mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A))
 		{
-			g_map->img->instances[0].x = g_map->player->x;
-			g_map->img->instances[0].y = g_map->player->y;
-			g_map->player->x += g_map->player->deltax;
-			g_map->player->y += g_map->player->deltay;
+			g_map->player->x += g_map->player->deltax / 32;
+			g_map->player->y += g_map->player->deltay / 32;
+			g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
+			g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
 			ft_check_walls_ud(g_map);
 			ft_paint_ray(g_map);
 		}

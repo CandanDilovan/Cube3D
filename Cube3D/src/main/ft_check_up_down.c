@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:22:17 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/26 14:08:11 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/26 18:38:53 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ static void	ft_dda(t_map *g_map)
 	is_wall = 0;
 	while (is_wall == 0)
 	{
+		if (g_map->map[g_map->walls->my][g_map->walls->mx] == '1')
+		{
+			is_wall = 1;
+			ft_printf("mapx = %d\n", g_map->walls->mx);
+			ft_printf("mapy = %d\n", g_map->walls->my);
+			ft_printf("is_wall = %d\n", is_wall);
+		}
 		if (g_map->walls->sdx < g_map->walls->sdy)
 		{
 			g_map->walls->sdx += g_map->walls->ddx;
@@ -28,13 +35,6 @@ static void	ft_dda(t_map *g_map)
 		{
 			g_map->walls->sdy += g_map->walls->ddy;
 			g_map->walls->my += g_map->walls->stepy;
-		}
-		if (g_map->map[g_map->walls->my][g_map->walls->mx] == '1')
-		{
-			is_wall = 1;
-			ft_printf("mapx = %d\n", g_map->walls->mx);
-			ft_printf("mapy = %d\n", g_map->walls->my);
-			ft_printf("is_wall = %d\n", is_wall);
 		}
 	}
 }
