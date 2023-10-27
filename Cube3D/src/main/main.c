@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/26 18:40:15 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/26 21:05:38 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,14 @@ static void	ft_paint_ray(t_map *g_map)
 	double	y;
 
 	//ft_printf("&");
-	a = sqrt(((g_map->walls->sdx)
-				* (g_map->walls->sdx))
-			+ ((g_map->walls->sdy)
-				* (g_map->walls->sdy)));
+	a = g_map->walls->sdx + g_map->walls->sdy;
 	x = g_map->player->x * 64;
 	y = g_map->player->y * 64;
 	if (g_map->player->ray)
 		mlx_delete_image(g_map->mlx, g_map->player->ray);
 	g_map->player->ray = mlx_new_image(g_map->mlx,
 			(g_map->widht * TILE_SIZE), (g_map->height * TILE_SIZE));
+	ft_printf("line %d\n", a);
 	a *= 64;
 	while (a > 0)
 	{
@@ -60,6 +58,7 @@ void	ft_move(void *param)
 				g_map->player->pa += 2 * PI;
 			g_map->player->deltax = cos(g_map->player->pa);
 			g_map->player->deltay = sin(g_map->player->pa);
+		//	ft_check_walls_ud(g_map);
 			ft_paint_ray(g_map);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A)
@@ -70,6 +69,7 @@ void	ft_move(void *param)
 				g_map->player->pa -= 2 * PI;
 			g_map->player->deltax = cos(g_map->player->pa);
 			g_map->player->deltay = sin(g_map->player->pa);
+	//		ft_check_walls_ud(g_map);
 			ft_paint_ray(g_map);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_S) && !mlx_is_key_down(m, MLX_KEY_W)
