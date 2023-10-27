@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:22:17 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/27 14:17:07 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/27 14:31:45 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static void	ft_dda(t_map *g_map)
 		}
 		ft_dda_comp(g_map, &is_wall, &touched);
 		if (touched == 1)
-			g_map->player->line(g_map->walls->sdy - g_map->player->y);
+			g_map->player->line = (g_map->walls->sdy - g_map->walls->ddy);
 		else if (touched == 0)
-			g_map->player->line(g_map->walls->sdx - g_map->player->x);
+			g_map->player->line = (g_map->walls->sdx - g_map->walls->ddx);
 	}
 }
 
