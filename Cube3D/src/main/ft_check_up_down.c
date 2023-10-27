@@ -6,25 +6,25 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:22:17 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/27 17:00:38 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/27 22:30:34 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-static void	ft_dda_comp(t_map *g_map, int *is_wall, int touched)
+static void	ft_dda_comp(t_map *g_map, t_walls *walls, int *is_wall, int touched)
 {
-	if (g_map->map[g_map->walls->my][g_map->walls->mx] == '1')
+	if (g_map->map[walls->my][walls->mx] == '1')
 	{
 		*is_wall = 1;
 		if (touched == 0)
-			g_map->player->line = (g_map->walls->sdy - g_map->walls->ddy);
+			g_map->player->line = (walls->sdy - walls->ddy);
 		else
-			g_map->player->line = (g_map->walls->sdx - g_map->walls->ddx);
+			g_map->player->line = (walls->sdx - walls->ddx);
 	}
 }
 
-static void	ft_dda(t_map *g_map)
+static void	ft_dda(t_map *g_map, t_walls *walls)
 {
 	int	is_wall;
 	int	touched;
@@ -32,69 +32,63 @@ static void	ft_dda(t_map *g_map)
 	is_wall = 0;
 	while (is_wall == 0)
 	{
-		if (g_map->walls->sdx < g_map->walls->sdy)
+		if (walls->sdx < walls->sdy)
 		{
-			g_map->walls->sdx += g_map->walls->ddx;
-			g_map->walls->mx += g_map->walls->stepx;
+			walls->sdx += walls->ddx;
+			walls->mx += walls->stepx;
 			touched = 1;
 		}
 		else
 		{
-			g_map->walls->sdy += g_map->walls->ddy;
-			g_map->walls->my += g_map->walls->stepy;
+			walls->sdy += walls->ddy;
+			walls->my += walls->stepy;
 			touched = 0;
 		}
-		ft_dda_comp(g_map, &is_wall, touched);
+		ft_dda_comp(g_map, walls,&is_wall, touched);
 	}
 }
 
-static void	ft_find_wall(t_map *g_map, double ddx, double ddy)
+static void	ft_find_wall(t_map *g_map, t_walls *walls, double ddx, double ddy)
 {
-	if (g_map->player->dirx < 0)
+	if (walls->anglex < 0)
 	{
-		g_map->walls->stepx = -1;
-		g_map->walls->sdx = (g_map->player->x - g_map->walls->mx) * ddx;
+		walls->stepx = -1;
+		walls->sdx = (g_map->player->x - walls->mx) * ddx;
 	}
 	else
 	{
-		g_map->walls->stepx = 1;
-		g_map->walls->sdx = (g_map->walls->mx + 1.0 - g_map->player->x) * ddx;
+		walls->stepx = 1;
+		walls->sdx = (walls->mx + 1.0 - g_map->player->x) * ddx;
 	}
-	if (g_map->player->diry < 0)
+	if (walls->angley < 0)
 	{
-		g_map->walls->stepy = -1;
-		g_map->walls->sdy = (g_map->player->y - g_map->walls->my) * ddy;
+		walls->stepy = -1;
+		walls->sdy = (g_map->player->y - walls->my) * ddy;
 	}
 	else
 	{
-		g_map->walls->stepy = 1;
-		g_map->walls->sdy = (g_map->walls->my + 1.0 - g_map->player->y) * ddy;
+		walls->stepy = 1;
+		walls->sdy = (walls->my + 1.0 - g_map->player->y) * ddy;
 	}
 	printf("dirx : %f\n", g_map->player->dirx);
 	printf("diry : %f\n", g_map->player->diry);
 }
 
-int	ft_check_walls_ud(t_map *g_map)
+int	ft_check_walls_ud(t_map *g_map, double ra, int r)
 {
-	int			r;
-
-	r = -1;
-	while (++r < 1)
-	{
-		g_map->walls->mx = (int)g_map->player->x;
-		g_map->walls->my = (int)g_map->player->y;
-		g_map->walls->ddx = sqrt(1 + (g_map->player->diry
-					* g_map->player->diry)
-				/ (g_map->player->dirx * g_map->player->dirx));
-		g_map->walls->ddy = sqrt(1 + (g_map->player->dirx
-					* g_map->player->dirx)
-				/ (g_map->player->diry * g_map->player->diry));
-		ft_find_wall(g_map, g_map->walls->ddx, g_map->walls->ddy);
-		ft_dda(g_map);
-	}
-	printf("sdy : %f\n", g_map->walls->sdy - g_map->walls->ddy);
-	printf("sdx : %f\n", g_map->walls->sdx - g_map->walls->ddx);
-	printf("mapx : %d\n", g_map->walls->mx);
-	printf("mapy : %d\n", g_map->walls->my);
+	g_map->walls[r] = malloc(sizeof(t_walls));
+	g_map->walls[r]->anglex = cos(ra);
+	g_map->walls[r]->angley = sin(ra);
+	g_map->walls[r]->mx = (int)g_map->player->x;
+	g_map->walls[r]->my = (int)g_map->player->y;
+	g_map->walls[r]->ddx = sqrt(1 + (g_map->walls[r]->angley
+				* g_map->walls[r]->angley)
+			/ (g_map->walls[r]->anglex * g_map->walls[r]->anglex));
+	g_map->walls[r]->ddy = sqrt(1 + (g_map->walls[r]->anglex
+				* g_map->walls[r]->anglex)
+			/ (g_map->walls[r]->angley * g_map->walls[r]->angley));
+	ft_find_wall(g_map, g_map->walls[r],
+		g_map->walls[r]->ddx, g_map->walls[r]->ddy);
+	ft_dda(g_map, g_map->walls[r]);
 	return (0);
 }

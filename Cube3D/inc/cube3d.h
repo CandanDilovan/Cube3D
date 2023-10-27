@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:47:40 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/27 14:14:50 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/27 22:30:07 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include <math.h>
 # define PI 3.141592653558209
+# define DR 0.0174533
 
 # define TILE_SIZE 64
 
@@ -38,8 +39,6 @@ typedef struct a_player
 	double		y;
 	double		dirx;
 	double		diry;
-	double		avionx;
-	double		aviony;
 	double		pa;
 	double		line;
 	mlx_image_t	*ray;
@@ -49,10 +48,18 @@ typedef struct a_walls
 {
 	int			stepx;
 	int			stepy;
+	double		lx;
+	double		ly;
+	double		x;
+	double		y;
+	double		wx;
+	double		wy;
 	double		sdx;
 	double		sdy;
 	double		ddx;
 	double		ddy;
+	double		anglex;
+	double		angley;
 	uint32_t	mx;
 	uint32_t	my;
 }				t_walls;
@@ -74,7 +81,7 @@ typedef struct a_map
 	t_texture	*texture;
 	mlx_image_t	*img;
 	t_player	*player;
-	t_walls		*walls;
+	t_walls		**walls;
 }				t_map;
 
 //map
@@ -93,7 +100,8 @@ int		ft_textures(t_map *g_map);
 int		ft_return_error(char *str);
 
 //rays
-int		ft_check_walls_ud(t_map *g_map);
+int		ft_check_walls_ud(t_map *g_map, double ra, int r);
 void	ft_lowest(t_map *g_map);
+void	ft_paint_ray(t_map *g_map, t_walls **walls);
 
 #endif

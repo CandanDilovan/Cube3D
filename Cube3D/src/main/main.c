@@ -6,34 +6,55 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/27 15:27:40 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/27 22:30:21 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-static void	ft_paint_ray(t_map *g_map)
+static double	ft_final_touch(t_map *g_map, t_walls *walls)
 {
 	double	a;
-	double	x;
-	double	y;
 
 	a = g_map->player->line;
-	x = g_map->player->x * 64;
-	y = g_map->player->y * 64;
+	walls->x = g_map->player->x * TILE_SIZE;
+	walls->y = g_map->player->y * TILE_SIZE;
+	walls->wx = walls->x + (walls->anglex * a * TILE_SIZE);
+	walls->wy = walls->y + (walls->angley * a * TILE_SIZE);
+	a = sqrt(((walls->wx - walls->x) * (walls->wx - walls->x))
+			+ ((walls->wy - walls->y) * (walls->wy - walls->y)));
+	walls->lx = (walls->wx - walls->x) / a;
+	walls->ly = (walls->wy - walls->y) / a;
+	return (a);
+}
+
+void	ft_paint_ray(t_map *g_map, t_walls **walls)
+{
+	int		r;
+	double	a;
+	double	ra;
+
+	r = -1;
 	if (g_map->player->ray)
 		mlx_delete_image(g_map->mlx, g_map->player->ray);
 	g_map->player->ray = mlx_new_image(g_map->mlx,
 			(g_map->widht * TILE_SIZE), (g_map->height * TILE_SIZE));
-	printf("line : %f\n", a);
-	a *= 64;
-	while (a > 0)
+	ra = g_map->player->pa - (DR * 30);
+	while (++r < 60)
 	{
-		mlx_put_pixel(g_map->player->ray, (x + 6),
-			(y + 6), 0xFFFFFF);
-		x += g_map->player->dirx;
-		y += g_map->player->diry;
-		a--;
+		ft_check_walls_ud(g_map, ra, r);
+		a = ft_final_touch(g_map, walls[r]);
+		while (a > 0 && walls[r]->x > 0 && walls[r]->y > 0 && walls[r]->x
+			< (g_map->widht * TILE_SIZE)
+			&& walls[r]->y < (g_map->height * TILE_SIZE))
+		{
+			mlx_put_pixel(g_map->player->ray, (walls[r]->x),
+				(walls[r]->y), 0xFFFFFF);
+			walls[r]->x += walls[r]->lx;
+			walls[r]->y += walls[r]->ly;
+			a--;
+		}
+		ra += DR;
 	}
 	mlx_image_to_window(g_map->mlx, g_map->player->ray, 0, 0);
 }
@@ -57,8 +78,7 @@ void	ft_move(void *param)
 				g_map->player->pa += 2 * PI;
 			g_map->player->dirx = cos(g_map->player->pa);
 			g_map->player->diry = sin(g_map->player->pa);
-			ft_check_walls_ud(g_map);
-			ft_paint_ray(g_map);
+			ft_paint_ray(g_map, g_map->walls);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A)
 			&& !mlx_is_key_down(m, MLX_KEY_W) && !mlx_is_key_down(m, MLX_KEY_S))
@@ -68,8 +88,7 @@ void	ft_move(void *param)
 				g_map->player->pa -= 2 * PI;
 			g_map->player->dirx = cos(g_map->player->pa);
 			g_map->player->diry = sin(g_map->player->pa);
-			ft_check_walls_ud(g_map);
-			ft_paint_ray(g_map);
+			ft_paint_ray(g_map, g_map->walls);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_S) && !mlx_is_key_down(m, MLX_KEY_W)
 			&& !mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A))
@@ -78,8 +97,7 @@ void	ft_move(void *param)
 			g_map->player->y -= g_map->player->diry / 32;
 			g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
 			g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
-			ft_check_walls_ud(g_map);
-			ft_paint_ray(g_map);
+			ft_paint_ray(g_map, g_map->walls);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_W) && !mlx_is_key_down(m, MLX_KEY_S)
 			&& !mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A))
@@ -88,8 +106,7 @@ void	ft_move(void *param)
 			g_map->player->y += g_map->player->diry / 32;
 			g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
 			g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
-			ft_check_walls_ud(g_map);
-			ft_paint_ray(g_map);
+			ft_paint_ray(g_map, g_map->walls);
 		}
 	}
 }
@@ -121,7 +138,6 @@ static void	ft_paint_map(t_map *g_map)
 		}
 	}
 }
-
 
 static void	ft_paint_player(t_map *g_map)
 {
@@ -183,7 +199,7 @@ int	main(int argc, char **argv)
 		if (!g_map)
 			return (-1);
 		g_map->player = malloc(sizeof(t_player));
-		g_map->walls = malloc(sizeof(t_walls));
+		g_map->walls = malloc(sizeof(t_walls *) * 60);
 		if (map_count(g_map, argv[1]) == -1 || ft_int_map(g_map) == -1)
 			return (free(g_map), ft_return_error("Error : FD failed"));
 		if (ft_no_void(g_map) == -1)
@@ -194,12 +210,8 @@ int	main(int argc, char **argv)
 		g_map->player->x = 1.5;
 		g_map->player->y = 1.5;
 		g_map->player->pa = 0;
-		g_map->player->avionx = 0;
-		g_map->player->avionx = 0.66;
-		g_map->player->dirx = -1;
-		g_map->player->diry = 0;
-		g_map->player->dirx = cos(g_map->player->pa) * 2;
-		g_map->player->diry = sin(g_map->player->pa) * 2;
+		g_map->player->dirx = cos(g_map->player->pa);
+		g_map->player->diry = sin(g_map->player->pa);
 	}
 	ft_set_map(g_map);
 	mlx_loop_hook(g_map->mlx, ft_move, g_map);
