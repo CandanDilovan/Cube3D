@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:22:17 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/26 21:12:09 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/27 12:42:58 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	ft_dda(t_map *g_map)
 
 static void	ft_find_wall(t_map *g_map, double ddx, double ddy)
 {
-	if (g_map->player->pa < PI)
+	if (g_map->player->pa < 0)
 	{
 		g_map->walls->stepx = -1;
 		g_map->walls->sdx = (g_map->player->x - g_map->walls->mx) * ddx;
@@ -51,7 +51,7 @@ static void	ft_find_wall(t_map *g_map, double ddx, double ddy)
 		g_map->walls->stepx = 1;
 		g_map->walls->sdx = (g_map->player->x + 1.0 - g_map->walls->mx) * ddx;
 	}
-	if (g_map->player->pa < PI)
+	if (g_map->player->pa < 0)
 	{
 		g_map->walls->stepy = -1;
 		g_map->walls->stepy = (g_map->player->y - g_map->walls->my) * ddy;
@@ -76,12 +76,12 @@ int	ft_check_walls_ud(t_map *g_map)
 		g_map->walls->my = (int)g_map->player->y;
 		if (ra < PI || ra > PI)
 		{
-			g_map->walls->ddx = sqrt(1 + (g_map->player->deltay
-						* g_map->player->deltay)
-					/ (g_map->player->deltax * g_map->player->deltax));
-			g_map->walls->ddy = sqrt(1 + (g_map->player->deltax
-						* g_map->player->deltax)
-					/ (g_map->player->deltay * g_map->player->deltay));
+			g_map->walls->ddx = sqrt(1 + (g_map->player->diry
+						* g_map->player->diry)
+					/ (g_map->player->dirx * g_map->player->dirx));
+			g_map->walls->ddy = sqrt(1 + (g_map->player->dirx
+						* g_map->player->dirx)
+					/ (g_map->player->diry * g_map->player->diry));
 			ft_find_wall(g_map, g_map->walls->ddx, g_map->walls->ddy);
 			ft_dda(g_map);
 		}

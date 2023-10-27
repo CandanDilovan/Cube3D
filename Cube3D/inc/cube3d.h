@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:47:40 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/26 13:35:55 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/27 12:30:53 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ typedef struct a_player
 {
 	double		x;
 	double		y;
-	double		deltax;
-	double		deltay;
 	double		dirx;
 	double		diry;
 	double		avionx;
