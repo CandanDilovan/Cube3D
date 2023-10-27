@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/27 14:39:27 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/27 15:27:40 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void	ft_paint_ray(t_map *g_map)
 		mlx_delete_image(g_map->mlx, g_map->player->ray);
 	g_map->player->ray = mlx_new_image(g_map->mlx,
 			(g_map->widht * TILE_SIZE), (g_map->height * TILE_SIZE));
-	a *= 64;
 	printf("line : %f\n", a);
+	a *= 64;
 	while (a > 0)
 	{
 		mlx_put_pixel(g_map->player->ray, (x + 6),
