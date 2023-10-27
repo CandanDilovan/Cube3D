@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:47:40 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/27 12:30:53 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/27 14:14:50 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct a_player
 	double		avionx;
 	double		aviony;
 	double		pa;
+	double		line;
 	mlx_image_t	*ray;
 }				t_player;
 

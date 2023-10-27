@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/27 12:39:22 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/27 14:00:33 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	ft_paint_ray(t_map *g_map)
 	double	x;
 	double	y;
 
-	//ft_printf("&");
 	a = g_map->walls->sdx + g_map->walls->sdy;
 	x = g_map->player->x * 64;
 	y = g_map->player->y * 64;
@@ -27,7 +26,7 @@ static void	ft_paint_ray(t_map *g_map)
 	g_map->player->ray = mlx_new_image(g_map->mlx,
 			(g_map->widht * TILE_SIZE), (g_map->height * TILE_SIZE));
 	ft_printf("line : %d\n", a);
-	a *= 124;
+	a *= 64;
 	while (a > 0)
 	{
 		mlx_put_pixel(g_map->player->ray, (x + 6),
