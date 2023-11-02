@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:47:40 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/27 22:30:07 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/02 14:13:47 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,12 @@ int		ft_check_walls_ud(t_map *g_map, double ra, int r);
 void	ft_lowest(t_map *g_map);
 void	ft_paint_ray(t_map *g_map, t_walls **walls);
 
+//move_hitbox
+
+void	ft_move(void *param);
+void	go_front(t_map *g_map);
+void	go_back(t_map *g_map);
+void	go_left(t_map *g_map);
+void	go_left(t_map *g_map);
+void	go_right(t_map *g_map);
 #endif
