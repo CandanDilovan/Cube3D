@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/03 13:57:08 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/03 14:44:00 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ static void	ft_draw_game(t_map *g_map, t_walls *walls, double a, int r)
 
 	y = 0;
 	a = (int)((g_map->height * TILE_SIZE) / walls->line);
-	dstart = -a / 2 + (g_map->height * TILE_SIZE) / 2;
+	dstart = (-a / 2) + ((g_map->height * TILE_SIZE) / 2);
 	if (dstart < 0)
 		dstart = 0;
-	dend = a / 2 + (g_map->height * TILE_SIZE) / 2;
-	if (dend >= g_map->height)
+	dend = (a / 2) + ((g_map->height * TILE_SIZE) / 2);
+	if (dend >= (g_map->height * TILE_SIZE))
 		dend = (g_map->height * TILE_SIZE) - 1;
 	jsp = (r + 1) * ((g_map->widht * TILE_SIZE) / 120);
 	r = r * ((g_map->widht * TILE_SIZE) / 120);
@@ -50,10 +50,12 @@ static void	ft_draw_game(t_map *g_map, t_walls *walls, double a, int r)
 		y = 0;
 		while (y < (g_map->height * TILE_SIZE))
 		{
+			if (y < dstart)
+				mlx_put_pixel(g_map->player->ray, r, y, 0x0000FF);
 			if (y >= dstart && y <= dend)
 				mlx_put_pixel(g_map->player->ray, r, y, 0xFFFFFF);
 			else
-				mlx_put_pixel(g_map->player->ray, r, y, 0);
+				mlx_put_pixel(g_map->player->ray, r, y, 0x0000FF);
 			y++;
 		}
 		r++;
@@ -72,7 +74,7 @@ void	ft_paint_ray(t_map *g_map, t_walls **walls)
 		mlx_delete_image(g_map->mlx, g_map->player->ray);
 	g_map->player->ray = mlx_new_image(g_map->mlx,
 			(g_map->widht * TILE_SIZE), (g_map->height * TILE_SIZE));
-	ra = g_map->player->pa - (DR * 30);
+	ra = g_map->player->pa - ((DR * 2) * 30);
 	while (++r < 120)
 	{
 		ft_check_walls_ud(g_map, ra, r);
