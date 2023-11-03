@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/27 22:30:21 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/28 13:27:56 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_paint_ray(t_map *g_map, t_walls **walls)
 	g_map->player->ray = mlx_new_image(g_map->mlx,
 			(g_map->widht * TILE_SIZE), (g_map->height * TILE_SIZE));
 	ra = g_map->player->pa - (DR * 30);
-	while (++r < 60)
+	while (++r < 120)
 	{
 		ft_check_walls_ud(g_map, ra, r);
 		a = ft_final_touch(g_map, walls[r]);
@@ -199,7 +199,7 @@ int	main(int argc, char **argv)
 		if (!g_map)
 			return (-1);
 		g_map->player = malloc(sizeof(t_player));
-		g_map->walls = malloc(sizeof(t_walls *) * 60);
+		g_map->walls = malloc(sizeof(t_walls *) * 120);
 		if (map_count(g_map, argv[1]) == -1 || ft_int_map(g_map) == -1)
 			return (free(g_map), ft_return_error("Error : FD failed"));
 		if (ft_no_void(g_map) == -1)

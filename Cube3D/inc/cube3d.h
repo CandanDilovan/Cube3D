@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:47:40 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/27 22:30:07 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/10/28 13:27:38 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdio.h>
 # include <math.h>
 # define PI 3.141592653558209
-# define DR 0.0174533
+# define DR 0.0174533 / 2
 
 # define TILE_SIZE 64
 
