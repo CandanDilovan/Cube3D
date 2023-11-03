@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 20:47:40 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/03 11:39:08 by dilovancand      ###   ########.fr       */
+/*   Created: 2023/11/03 11:39:54 by dilovancand       #+#    #+#             */
+/*   Updated: 2023/11/03 13:45:31 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct a_player
 	double		dirx;
 	double		diry;
 	double		pa;
-	double		line;
 	mlx_image_t	*ray;
 }				t_player;
 
@@ -60,6 +59,7 @@ typedef struct a_walls
 	double		ddy;
 	double		anglex;
 	double		angley;
+	double		line;
 	uint32_t	mx;
 	uint32_t	my;
 }				t_walls;

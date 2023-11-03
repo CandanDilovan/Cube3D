@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/03 11:38:03 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/03 13:57:08 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static double	ft_final_touch(t_map *g_map, t_walls *walls)
 {
 	double	a;
 
-	a = g_map->player->line;
+	a = walls->line;
 	walls->x = g_map->player->x * TILE_SIZE;
 	walls->y = g_map->player->y * TILE_SIZE;
 	walls->wx = walls->x + (walls->anglex * a * TILE_SIZE);
@@ -28,6 +28,38 @@ static double	ft_final_touch(t_map *g_map, t_walls *walls)
 	return (a);
 }
 
+static void	ft_draw_game(t_map *g_map, t_walls *walls, double a, int r)
+{
+	uint32_t	dstart;
+	uint32_t	dend;
+	uint32_t	y;
+	int 		jsp;
+
+	y = 0;
+	a = (int)((g_map->height * TILE_SIZE) / walls->line);
+	dstart = -a / 2 + (g_map->height * TILE_SIZE) / 2;
+	if (dstart < 0)
+		dstart = 0;
+	dend = a / 2 + (g_map->height * TILE_SIZE) / 2;
+	if (dend >= g_map->height)
+		dend = (g_map->height * TILE_SIZE) - 1;
+	jsp = (r + 1) * ((g_map->widht * TILE_SIZE) / 120);
+	r = r * ((g_map->widht * TILE_SIZE) / 120);
+	while (r < jsp)
+	{
+		y = 0;
+		while (y < (g_map->height * TILE_SIZE))
+		{
+			if (y >= dstart && y <= dend)
+				mlx_put_pixel(g_map->player->ray, r, y, 0xFFFFFF);
+			else
+				mlx_put_pixel(g_map->player->ray, r, y, 0);
+			y++;
+		}
+		r++;
+	}
+}
+
 void	ft_paint_ray(t_map *g_map, t_walls **walls)
 {
 	int		r;
@@ -35,6 +67,7 @@ void	ft_paint_ray(t_map *g_map, t_walls **walls)
 	double	ra;
 
 	r = -1;
+	a = 0.0;
 	if (g_map->player->ray)
 		mlx_delete_image(g_map->mlx, g_map->player->ray);
 	g_map->player->ray = mlx_new_image(g_map->mlx,
@@ -43,17 +76,8 @@ void	ft_paint_ray(t_map *g_map, t_walls **walls)
 	while (++r < 120)
 	{
 		ft_check_walls_ud(g_map, ra, r);
-		a = ft_final_touch(g_map, walls[r]);
-		while (a > 0 && walls[r]->x > 0 && walls[r]->y > 0 && walls[r]->x
-			< (g_map->widht * TILE_SIZE)
-			&& walls[r]->y < (g_map->height * TILE_SIZE))
-		{
-			mlx_put_pixel(g_map->player->ray, (walls[r]->x),
-				(walls[r]->y), 0xFFFFFF);
-			walls[r]->x += walls[r]->lx;
-			walls[r]->y += walls[r]->ly;
-			a--;
-		}
+		ft_final_touch(g_map, walls[r]);
+		ft_draw_game(g_map, g_map->walls[r], a, r);
 		ra += DR;
 	}
 	mlx_image_to_window(g_map->mlx, g_map->player->ray, 0, 0);
@@ -111,50 +135,50 @@ void	ft_paint_ray(t_map *g_map, t_walls **walls)
 // 	}
 // }
 
-static void	ft_paint_map(t_map *g_map)
-{
-	uint32_t		x;
-	uint32_t		y;
-	mlx_image_t		*img;
-	mlx_image_t		*wimg;
-	mlx_texture_t	*ntm;
+// static void	ft_paint_map(t_map *g_map)
+// {
+// 	uint32_t		x;
+// 	uint32_t		y;
+// 	mlx_image_t		*img;
+// 	mlx_image_t		*wimg;
+// 	mlx_texture_t	*ntm;
 
-	y = -1;
-	ntm = mlx_load_png("src/img/DarkBlue64.png");
-	img = mlx_texture_to_image(g_map->mlx, ntm);
-	ntm = mlx_load_png("src/img/Black64.png");
-	wimg = mlx_texture_to_image(g_map->mlx, ntm);
-	while (g_map->height > ++y)
-	{
-		x = -1;
-		while (ft_strlen(g_map->map[y]) > ++x)
-		{
-			if (g_map->map[y][x] && g_map->int_map[y][x] == 1)
-				mlx_image_to_window(g_map->mlx, img,
-					(x * TILE_SIZE), (y * TILE_SIZE));
-			else if (g_map->map[y][x] && g_map->int_map[y][x] == 0)
-				mlx_image_to_window(g_map->mlx, wimg,
-					(x * TILE_SIZE), (y * TILE_SIZE));
-		}
-	}
-}
+// 	y = -1;
+// 	ntm = mlx_load_png("src/img/DarkBlue64.png");
+// 	img = mlx_texture_to_image(g_map->mlx, ntm);
+// 	ntm = mlx_load_png("src/img/Black64.png");
+// 	wimg = mlx_texture_to_image(g_map->mlx, ntm);
+// 	while (g_map->height > ++y)
+// 	{
+// 		x = -1;
+// 		while (ft_strlen(g_map->map[y]) > ++x)
+// 		{
+// 			if (g_map->map[y][x] && g_map->int_map[y][x] == 1)
+// 				mlx_image_to_window(g_map->mlx, img,
+// 					(x * TILE_SIZE), (y * TILE_SIZE));
+// 			else if (g_map->map[y][x] && g_map->int_map[y][x] == 0)
+// 				mlx_image_to_window(g_map->mlx, wimg,
+// 					(x * TILE_SIZE), (y * TILE_SIZE));
+// 		}
+// 	}
+// }
 
-static void	ft_paint_player(t_map *g_map)
-{
-	int			x;
-	int			y;
+// static void	ft_paint_player(t_map *g_map)
+// {
+// 	int			x;
+// 	int			y;
 
-	y = -1;
-	g_map->img = mlx_new_image(g_map->mlx, 13, 12);
-	while (++y < 12)
-	{
-		x = -1;
-		while (++x < 13)
-			mlx_put_pixel(g_map->img, x, y, 0x00FFFFFF);
-	}
-	mlx_image_to_window(g_map->mlx, g_map->img,
-		(g_map->player->x * TILE_SIZE), (g_map->player->y * TILE_SIZE));
-}
+// 	y = -1;
+// 	g_map->img = mlx_new_image(g_map->mlx, 13, 12);
+// 	while (++y < 12)
+// 	{
+// 		x = -1;
+// 		while (++x < 13)
+// 			mlx_put_pixel(g_map->img, x, y, 0x00FFFFFF);
+// 	}
+// 	mlx_image_to_window(g_map->mlx, g_map->img,
+// 		(g_map->player->x * TILE_SIZE), (g_map->player->y * TILE_SIZE));
+// }
 
 // static void	ft_print_intmap(t_map *g_map)
 // {
@@ -180,8 +204,8 @@ static int32_t	ft_set_map(t_map *g_map)
 	win_h = (g_map->height) * TILE_SIZE;
 	win_w = (g_map->widht) * TILE_SIZE;
 	g_map->mlx = mlx_init(win_w, win_h, "Cube3D", true);
-	ft_paint_map(g_map);
-	ft_paint_player(g_map);
+	// ft_paint_map(g_map);
+	// ft_paint_player(g_map);
 	return (0);
 }
 

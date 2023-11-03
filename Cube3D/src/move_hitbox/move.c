@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:46:42 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/02 14:30:56 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/03 13:20:44 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	go_front(t_map *g_map)
 	// if (!check_hitbox(g_map, (g_map->player->x), (g_map->player->y)))
 	g_map->player->x += g_map->player->dirx / 32;
 	g_map->player->y += g_map->player->diry / 32;
-	g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
-	g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
+	// g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
+	// g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
 	ft_paint_ray(g_map, g_map->walls);
 }
 
@@ -70,8 +70,8 @@ void	go_back(t_map *g_map)
 {
 	g_map->player->x -= g_map->player->dirx / 32;
 	g_map->player->y -= g_map->player->diry / 32;
-	g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
-	g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
+	// g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
+	// g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
 	ft_paint_ray(g_map, g_map->walls);
 }
 
