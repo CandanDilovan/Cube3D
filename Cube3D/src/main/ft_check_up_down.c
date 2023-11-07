@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:22:17 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/27 22:30:34 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/03 12:28:09 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	ft_dda_comp(t_map *g_map, t_walls *walls, int *is_wall, int touched)
 	{
 		*is_wall = 1;
 		if (touched == 0)
-			g_map->player->line = (walls->sdy - walls->ddy);
+			walls->line = (walls->sdy - walls->ddy);
 		else
-			g_map->player->line = (walls->sdx - walls->ddx);
+			walls->line = (walls->sdx - walls->ddx);
 	}
 }
 
@@ -44,7 +44,7 @@ static void	ft_dda(t_map *g_map, t_walls *walls)
 			walls->my += walls->stepy;
 			touched = 0;
 		}
-		ft_dda_comp(g_map, walls,&is_wall, touched);
+		ft_dda_comp(g_map, walls, &is_wall, touched);
 	}
 }
 
@@ -76,7 +76,8 @@ static void	ft_find_wall(t_map *g_map, t_walls *walls, double ddx, double ddy)
 
 int	ft_check_walls_ud(t_map *g_map, double ra, int r)
 {
-	g_map->walls[r] = malloc(sizeof(t_walls));
+	if (!g_map->walls[r])
+		g_map->walls[r] = malloc(sizeof(t_walls));
 	g_map->walls[r]->anglex = cos(ra);
 	g_map->walls[r]->angley = sin(ra);
 	g_map->walls[r]->mx = (int)g_map->player->x;

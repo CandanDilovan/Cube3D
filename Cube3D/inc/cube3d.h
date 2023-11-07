@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 20:47:40 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/02 14:13:47 by aabel            ###   ########.fr       */
+/*   Created: 2023/11/03 11:39:54 by dilovancand       #+#    #+#             */
+/*   Updated: 2023/11/03 14:35:05 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdio.h>
 # include <math.h>
 # define PI 3.141592653558209
-# define DR 0.0174533
+# define DR 0.0174533 / 2
 
 # define TILE_SIZE 64
 
@@ -40,7 +40,6 @@ typedef struct a_player
 	double		dirx;
 	double		diry;
 	double		pa;
-	double		line;
 	mlx_image_t	*ray;
 }				t_player;
 
@@ -60,6 +59,7 @@ typedef struct a_walls
 	double		ddy;
 	double		anglex;
 	double		angley;
+	double		line;
 	uint32_t	mx;
 	uint32_t	my;
 }				t_walls;

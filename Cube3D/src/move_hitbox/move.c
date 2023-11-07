@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:46:42 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/07 14:19:16 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/07 14:20:31 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	go_front(t_map *g_map)
 	// if (!check_hitbox(g_map, (g_map->player->x), (g_map->player->y)))
 	g_map->player->x += g_map->player->dirx / 32;
 	g_map->player->y += g_map->player->diry / 32;
-	g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
-	g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
+	// g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
+	// g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
 	ft_paint_ray(g_map, g_map->walls);
 }
 
@@ -70,8 +70,8 @@ void	go_back(t_map *g_map)
 {
 	g_map->player->x -= g_map->player->dirx / 32;
 	g_map->player->y -= g_map->player->diry / 32;
-	g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
-	g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
+	// g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
+	// g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
 	ft_paint_ray(g_map, g_map->walls);
 }
 
