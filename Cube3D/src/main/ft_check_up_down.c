@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:22:17 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/03 12:28:09 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/05 14:32:29 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,20 @@ static void	ft_find_wall(t_map *g_map, t_walls *walls, double ddx, double ddy)
 	printf("diry : %f\n", g_map->player->diry);
 }
 
-int	ft_check_walls_ud(t_map *g_map, double ra, int r)
+int	ft_check_walls_ud(t_map *g_map, double ra)
 {
-	if (!g_map->walls[r])
-		g_map->walls[r] = malloc(sizeof(t_walls));
-	g_map->walls[r]->anglex = cos(ra);
-	g_map->walls[r]->angley = sin(ra);
-	g_map->walls[r]->mx = (int)g_map->player->x;
-	g_map->walls[r]->my = (int)g_map->player->y;
-	g_map->walls[r]->ddx = sqrt(1 + (g_map->walls[r]->angley
-				* g_map->walls[r]->angley)
-			/ (g_map->walls[r]->anglex * g_map->walls[r]->anglex));
-	g_map->walls[r]->ddy = sqrt(1 + (g_map->walls[r]->anglex
-				* g_map->walls[r]->anglex)
-			/ (g_map->walls[r]->angley * g_map->walls[r]->angley));
-	ft_find_wall(g_map, g_map->walls[r],
-		g_map->walls[r]->ddx, g_map->walls[r]->ddy);
-	ft_dda(g_map, g_map->walls[r]);
+	g_map->walls->anglex = cos(ra);
+	g_map->walls->angley = sin(ra);
+	g_map->walls->mx = (int)g_map->player->x;
+	g_map->walls->my = (int)g_map->player->y;
+	g_map->walls->ddx = sqrt(1 + (g_map->walls->angley
+				* g_map->walls->angley)
+			/ (g_map->walls->anglex * g_map->walls->anglex));
+	g_map->walls->ddy = sqrt(1 + (g_map->walls->anglex
+				* g_map->walls->anglex)
+			/ (g_map->walls->angley * g_map->walls->angley));
+	ft_find_wall(g_map, g_map->walls,
+		g_map->walls->ddx, g_map->walls->ddy);
+	ft_dda(g_map, g_map->walls);
 	return (0);
 }

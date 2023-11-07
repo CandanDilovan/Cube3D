@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:39:54 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/03 14:35:05 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/07 15:13:00 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 # include <stdio.h>
 # include <math.h>
 # define PI 3.141592653558209
-# define DR 0.0174533 / 2
+# define DR 0.0174533
+# define WH	720
+# define WW	1280
 
 # define TILE_SIZE 64
 
@@ -31,6 +33,8 @@ typedef struct a_texture
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
 	mlx_texture_t	*east;
+	int				*ceilling;
+	int				*floor;
 }				t_texture;
 
 typedef struct a_player
@@ -81,7 +85,7 @@ typedef struct a_map
 	t_texture	*texture;
 	mlx_image_t	*img;
 	t_player	*player;
-	t_walls		**walls;
+	t_walls		*walls;
 }				t_map;
 
 //map
@@ -91,6 +95,7 @@ int		ft_is_cub(char *map);
 int		ft_no_void(t_map *g_map);
 int		ft_is_map(char	*line, int *flag);
 int		ft_int_map(t_map *g_map);
+int		*ft_rgb(char *str);
 
 //texture
 int		ft_identify_texture(t_map *g_map, char *line);
@@ -100,9 +105,9 @@ int		ft_textures(t_map *g_map);
 int		ft_return_error(char *str);
 
 //rays
-int		ft_check_walls_ud(t_map *g_map, double ra, int r);
+int		ft_check_walls_ud(t_map *g_map, double ra);
 void	ft_lowest(t_map *g_map);
-void	ft_paint_ray(t_map *g_map, t_walls **walls);
+void	ft_paint_ray(t_map *g_map, t_walls *walls);
 
 //move_hitbox
 

@@ -6,13 +6,13 @@
 #    By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/25 15:27:08 by dilovancand       #+#    #+#              #
-#    Updated: 2023/11/03 11:40:30 by dilovancand      ###   ########.fr        #
+#    Updated: 2023/11/07 15:21:32 by dilovancand      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Cube3D
-SOURCES = src/main/main.c src/main/ft_check_up_down.c \
-		src/Parsing/ft_parsing.c src/Parsing/ft_parsing_texture.c src/Parsing/ft_parsing_map.c src/Parsing/ft_return_error.c src/Parsing/ft_check_texture.c \
+SOURCES = src/main/main.c src/main/ft_check_up_down.c src/main/ft_draw.c \
+		src/Parsing/ft_parsing.c src/Parsing/ft_parsing_texture.c src/Parsing/ft_parsing_map.c src/Parsing/ft_return_error.c src/Parsing/ft_check_texture.c src/Parsing/ft_check_colors.c\
 		src/move_hitbox/hitbox.c src/move_hitbox/move.c \
 			
 OBJECTS = $(SOURCES:.c=.o)
