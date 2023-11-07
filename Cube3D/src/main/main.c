@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/07 16:01:16 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/07 18:55:54 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,27 @@
 
 static int32_t	ft_set_map(t_map *g_map)
 {
+	mlx_image_t	*background;
+	uint32_t	x;
+	uint32_t	y;
 
+	y = -1;
 	g_map->mlx = mlx_init(WW, WH, "Cube3D", true);
+	background = mlx_new_image(g_map->mlx, WW, WH);
+	while (++y < WH)
+	{
+		x = -1;
+		while (++x < WW)
+		{
+			if (y < WH / 2)
+				mlx_put_pixel(background, x, y,
+					ft_get_colors(g_map->texture->ceilling));
+			else if (y > WH / 2)
+				mlx_put_pixel(background, x, y,
+					ft_get_colors(g_map->texture->floor));
+		}
+	}
+	mlx_image_to_window(g_map->mlx, background, 0, 0);
 	return (0);
 }
 
@@ -58,7 +77,6 @@ int	main(int argc, char **argv)
 	g_map->player->dirx = cos(g_map->player->pa);
 	g_map->player->diry = sin(g_map->player->pa);
 	g_map->texture->ceilling = ft_rgb(g_map->c);
-	ft_printf("\n%d\n", g_map->texture->ceilling[1]);
 	g_map->texture->floor = ft_rgb(g_map->f);
 	if (!g_map->texture->ceilling || !g_map->texture->floor)
 		return (ft_return_error("Something's wrong with colors"));

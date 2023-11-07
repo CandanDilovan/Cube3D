@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:39:54 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/07 16:09:13 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/07 18:50:25 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,33 +89,34 @@ typedef struct a_map
 }				t_map;
 
 //map
-int		map_count(t_map *g_map, char *map);
-size_t	ft_strlen_g_map(const char *str);
-int		ft_is_cub(char *map);
-int		ft_no_void(t_map *g_map);
-int		ft_is_map(char	*line, int *flag);
-int		ft_int_map(t_map *g_map);
-int		*ft_rgb(char *str);
+int			map_count(t_map *g_map, char *map);
+size_t		ft_strlen_g_map(const char *str);
+int			ft_is_cub(char *map);
+int			ft_no_void(t_map *g_map);
+int			ft_is_map(char	*line, int *flag);
+int			ft_int_map(t_map *g_map);
+int			*ft_rgb(char *str);
 
 //texture
-int		ft_identify_texture(t_map *g_map, char *line);
-int		ft_textures(t_map *g_map);
+int			ft_identify_texture(t_map *g_map, char *line);
+int			ft_textures(t_map *g_map);
+uint32_t	ft_get_colors(int *rgb);
 
 //print_error
-int		ft_return_error(char *str);
+int			ft_return_error(char *str);
 
 //rays
-int		ft_check_walls_ud(t_map *g_map, double ra);
-void	ft_lowest(t_map *g_map);
-void	ft_paint_ray(t_map *g_map, t_walls *walls);
+int			ft_check_walls_ud(t_map *g_map, double ra);
+void		ft_lowest(t_map *g_map);
+void		ft_paint_ray(t_map *g_map, t_walls *walls);
 
 //move_hitbox
 
-void	ft_move(void *param);
-void	go_front(t_map *g_map);
-void	go_back(t_map *g_map);
-void	go_left(t_map *g_map);
-void	go_left(t_map *g_map);
-void	go_right(t_map *g_map);
-int		check_hitbox(t_map *g_map, double player_x, double player_y);
+void		ft_move(void *param);
+void		go_front(t_map *g_map);
+void		go_back(t_map *g_map);
+void		go_left(t_map *g_map);
+void		go_left(t_map *g_map);
+void		go_right(t_map *g_map);
+int			check_hitbox(t_map *g_map, double player_x, double player_y);
 #endif

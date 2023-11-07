@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:46:42 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/07 16:09:12 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/07 19:10:57 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,40 +37,37 @@ void	ft_move(void *param)
 			go_front(g_map);
 		if (mlx_is_key_down(m, MLX_KEY_LEFT))
 		{
-			g_map->player->pa -= 0.01;
+			g_map->player->pa -= 0.025;
 			if (g_map->player->pa < 0)
 				g_map->player->pa += 2 * PI;
 			g_map->player->dirx = cos(g_map->player->pa);
 			g_map->player->diry = sin(g_map->player->pa);
-			ft_paint_ray(g_map, g_map->walls);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_RIGHT))
 		{
-			g_map->player->pa += 0.01;
+			g_map->player->pa += 0.025;
 			if (g_map->player->pa > 2 * PI)
 				g_map->player->pa -= 2 * PI;
 			g_map->player->dirx = cos(g_map->player->pa);
 			g_map->player->diry = sin(g_map->player->pa);
-			ft_paint_ray(g_map, g_map->walls);
 		}
 	}
+	ft_paint_ray(g_map, g_map->walls);
 }
 
 void	go_front(t_map *g_map)
 {
 	// if (!check_hitbox(g_map, (g_map->player->x), (g_map->player->y)))
-	g_map->player->x += g_map->player->dirx / 32;
-	g_map->player->y += g_map->player->diry / 32;
+	g_map->player->x += g_map->player->dirx / 16;
+	g_map->player->y += g_map->player->diry / 16;
 	// g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
 	// g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
-	ft_paint_ray(g_map, g_map->walls);
 }
 
 void	go_back(t_map *g_map)
 {
-	g_map->player->x -= g_map->player->dirx / 32;
-	g_map->player->y -= g_map->player->diry / 32;
-	ft_paint_ray(g_map, g_map->walls);
+	g_map->player->x -= g_map->player->dirx / 16;
+	g_map->player->y -= g_map->player->diry / 16;
 }
 
 void	go_left(t_map *g_map)
@@ -79,7 +76,6 @@ void	go_left(t_map *g_map)
 	g_map->player->y += ((sin(g_map->player->pa - (2 * PI / 4))) / 32);
 	// g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
 	// g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
-	ft_paint_ray(g_map, g_map->walls);
 }
 
 void	go_right(t_map *g_map)
@@ -88,5 +84,4 @@ void	go_right(t_map *g_map)
 	g_map->player->y += ((sin(g_map->player->pa + (2 * PI / 4))) / 32);
 	// g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
 	// g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
-	ft_paint_ray(g_map, g_map->walls);
 }

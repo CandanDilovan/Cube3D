@@ -6,13 +6,13 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:20:57 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/07 16:39:49 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/07 18:54:39 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-static uint32_t	ft_get_colors(int *rgb)
+uint32_t	ft_get_colors(int *rgb)
 {
 	uint32_t	colors;
 	int			a;
@@ -59,9 +59,6 @@ static void	ft_draw_game(t_map *g_map, t_walls *walls, double a, int r)
 	{
 		if (y >= dstart && y <= dend)
 			mlx_put_pixel(g_map->player->ray, r, y, 0xFFFFFFFF);
-		else
-			mlx_put_pixel(g_map->player->ray, r, y,
-				ft_get_colors(g_map->texture->ceilling));
 		y++;
 	}
 }
