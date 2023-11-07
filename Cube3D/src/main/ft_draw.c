@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:20:57 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/07 16:06:22 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/07 16:39:49 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,13 @@
 static uint32_t	ft_get_colors(int *rgb)
 {
 	uint32_t	colors;
+	int			a;
 
-	colors = ((rgb[0] & 0xff) << 16) + ((rgb[1] & 0xff) << 8) + (rgb[2] & 0xff);
+	a = 255;
+	colors = (rgb[0] << 24);
+	colors = colors | (rgb[1] << 16);
+	colors = colors | (rgb[2] << 8);
+	colors = colors | (a << 0);
 	return (colors);
 }
 
@@ -53,9 +58,10 @@ static void	ft_draw_game(t_map *g_map, t_walls *walls, double a, int r)
 	while (y < WH)
 	{
 		if (y >= dstart && y <= dend)
-			mlx_put_pixel(g_map->player->ray, r, y, 0xFFFFFF);
+			mlx_put_pixel(g_map->player->ray, r, y, 0xFFFFFFFF);
 		else
-			mlx_put_pixel(g_map->player->ray, r, y, ft_get_colors(g_map->texture->ceilling));
+			mlx_put_pixel(g_map->player->ray, r, y,
+				ft_get_colors(g_map->texture->ceilling));
 		y++;
 	}
 }
