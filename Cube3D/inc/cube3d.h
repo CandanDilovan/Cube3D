@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:39:54 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/07 15:13:00 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/07 16:09:13 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,4 +117,5 @@ void	go_back(t_map *g_map);
 void	go_left(t_map *g_map);
 void	go_left(t_map *g_map);
 void	go_right(t_map *g_map);
+int		check_hitbox(t_map *g_map, double player_x, double player_y);
 #endif
