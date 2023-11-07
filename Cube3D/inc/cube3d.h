@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:39:54 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/03 14:35:05 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/07 14:35:35 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,5 @@ void	go_back(t_map *g_map);
 void	go_left(t_map *g_map);
 void	go_left(t_map *g_map);
 void	go_right(t_map *g_map);
+int		check_hitbox(t_map *g_map, double player_x, double player_y);
 #endif
