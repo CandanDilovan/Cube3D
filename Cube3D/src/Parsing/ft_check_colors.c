@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:10:53 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/07 16:22:52 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/08 14:56:55 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ int	*ft_rgb(char *str)
 	{
 		b = -1;
 		rgb[c] = ft_malloc_rgb(str, rgb[c], a);
+		if (!rgb[c])
+			return (free_all_cub(rgb, c), NULL);
 		while (str[a + ++b] >= '0' && str[a + b] <= '9' && str[a] != ',')
 			rgb[c][b] = str[a + b];
-		if (b == 0 || b > 3)
-			return (free_all_cub(rgb, c), NULL);
 		if (str[a + b] == ',' || str[a + b] == '\n')
 			a++;
 		c++;
