@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/03 14:44:00 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/08 13:41:09 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,58 +84,6 @@ void	ft_paint_ray(t_map *g_map, t_walls **walls)
 	}
 	mlx_image_to_window(g_map->mlx, g_map->player->ray, 0, 0);
 }
-
-// void	ft_move(void *param)
-// {
-// 	t_map		*g_map;
-// 	mlx_t		*m;
-
-// 	g_map = (t_map *)param;
-// 	m = g_map->mlx;
-// 	if (mlx_is_key_down(m, MLX_KEY_ESCAPE))
-// 		mlx_close_window(m);
-// 	if (g_map)
-// 	{
-// 		if (mlx_is_key_down(m, MLX_KEY_A) && !mlx_is_key_down(m, MLX_KEY_D)
-// 			&& !mlx_is_key_down(m, MLX_KEY_W) && !mlx_is_key_down(m, MLX_KEY_S))
-// 		{
-// 			g_map->player->pa -= 0.01;
-// 			if (g_map->player->pa < 0)
-// 				g_map->player->pa += 2 * PI;
-// 			g_map->player->dirx = cos(g_map->player->pa);
-// 			g_map->player->diry = sin(g_map->player->pa);
-// 			ft_paint_ray(g_map, g_map->walls);
-// 		}
-// 		if (mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A)
-// 			&& !mlx_is_key_down(m, MLX_KEY_W) && !mlx_is_key_down(m, MLX_KEY_S))
-// 		{
-// 			g_map->player->pa += 0.01;
-// 			if (g_map->player->pa > 2 * PI)
-// 				g_map->player->pa -= 2 * PI;
-// 			g_map->player->dirx = cos(g_map->player->pa);
-// 			g_map->player->diry = sin(g_map->player->pa);
-// 			ft_paint_ray(g_map, g_map->walls);
-// 		}
-// 		if (mlx_is_key_down(m, MLX_KEY_S) && !mlx_is_key_down(m, MLX_KEY_W)
-// 			&& !mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A))
-// 		{
-// 			g_map->player->x -= g_map->player->dirx / 32;
-// 			g_map->player->y -= g_map->player->diry / 32;
-// 			g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
-// 			g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
-// 			ft_paint_ray(g_map, g_map->walls);
-// 		}
-// 		if (mlx_is_key_down(m, MLX_KEY_W) && !mlx_is_key_down(m, MLX_KEY_S)
-// 			&& !mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A))
-// 		{
-// 			g_map->player->x += g_map->player->dirx / 32;
-// 			g_map->player->y += g_map->player->diry / 32;
-// 			g_map->img->instances[0].x = g_map->player->x * TILE_SIZE;
-// 			g_map->img->instances[0].y = g_map->player->y * TILE_SIZE;
-// 			ft_paint_ray(g_map, g_map->walls);
-// 		}
-// 	}
-// }
 
 // static void	ft_paint_map(t_map *g_map)
 // {
