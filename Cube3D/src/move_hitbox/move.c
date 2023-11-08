@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:46:42 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/08 14:49:04 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/08 15:34:28 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	ft_move(void *param)
 void	go_front(t_map *g_map)
 {
 	if (!check_hitbox(g_map,
-			(g_map->player->x + (g_map->player->dirx)),
-			(g_map->player->y + (g_map->player->diry))))
+			(g_map->player->x + ((g_map->player->dirx / 32) - 0.02)),
+			(g_map->player->y + ((g_map->player->diry / 32) - 0.02))))
 	{
 		g_map->player->x += g_map->player->dirx / 32;
 		g_map->player->y += g_map->player->diry / 32;

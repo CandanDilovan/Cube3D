@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/08 14:47:37 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/08 15:28:54 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	main(int argc, char **argv)
 	if (!g_map->texture->ceilling || !g_map->texture->floor)
 		return (ft_return_error("Something's wrong with colors"));
 	ft_set_map(g_map);
+	g_map->player->ray = mlx_new_image(g_map->mlx, WW, WH);
+	mlx_image_to_window(g_map->mlx, g_map->player->ray, 0, 0);
 	mlx_loop_hook(g_map->mlx, ft_move, g_map);
 	mlx_loop(g_map->mlx);
 	mlx_terminate(g_map->mlx);

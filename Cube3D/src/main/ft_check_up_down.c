@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:22:17 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/05 14:32:29 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/08 15:27:31 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ static void	ft_find_wall(t_map *g_map, t_walls *walls, double ddx, double ddy)
 		walls->stepy = 1;
 		walls->sdy = (walls->my + 1.0 - g_map->player->y) * ddy;
 	}
-	printf("dirx : %f\n", g_map->player->dirx);
-	printf("diry : %f\n", g_map->player->diry);
 }
 
 int	ft_check_walls_ud(t_map *g_map, double ra)

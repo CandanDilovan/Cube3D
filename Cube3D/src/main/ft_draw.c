@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:20:57 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/07 22:17:45 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/08 15:28:31 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@ static void	ft_draw_game(t_map *g_map, t_walls *walls, double a, int r)
 		dend = WH - 1;
 	while (y < WH)
 	{
+		mlx_put_pixel(g_map->player->ray, r, y, 0);
+		y++;
+	}
+	y = 0;
+	while (y < WH)
+	{
 		if (y >= dstart && y <= dend)
 			mlx_put_pixel(g_map->player->ray, r, y, 0xFFFFFFFF);
 		y++;
@@ -71,18 +77,12 @@ void	ft_paint_ray(t_map *g_map, t_walls *walls)
 
 	r = -1;
 	a = 0.0;
-	if (g_map->player->ray)
-		mlx_delete_image(g_map->mlx, g_map->player->ray);
-	g_map->player->ray = mlx_new_image(g_map->mlx, WW, WH);
 	ra = g_map->player->pa - (DR * 30);
 	while (++r < WW)
 	{
-		ft_printf("%d\n", r);
-		printf("%f\n", ra);
 		ft_check_walls_ud(g_map, ra);
 		ft_final_touch(g_map, walls);
 		ft_draw_game(g_map, g_map->walls, a, r);
 		ra += DR / 20;
 	}
-	mlx_image_to_window(g_map->mlx, g_map->player->ray, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 06:56:57 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/15 12:28:31 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/08 15:12:05 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static char	*ft_texture_path(char *line, int a)
 		str[b] = line[a + b];
 		b++;
 	}
+	str[b] = '\0';
 	return (str);
 }
 
