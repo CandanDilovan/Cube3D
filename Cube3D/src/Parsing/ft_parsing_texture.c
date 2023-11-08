@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing_texture.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 06:56:57 by dilovancand       #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/11/08 15:12:05 by dilovancand      ###   ########.fr       */
+=======
+/*   Updated: 2023/11/08 15:12:56 by aabel            ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /* ************************************************************************** */
 

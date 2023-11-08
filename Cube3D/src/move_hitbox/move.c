@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:46:42 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/08 15:34:28 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/08 16:07:27 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	go_front(t_map *g_map)
 void	go_back(t_map *g_map)
 {
 	if (!check_hitbox(g_map,
-			(g_map->player->x - (g_map->player->dirx)),
-			(g_map->player->y - (g_map->player->diry))))
+			(g_map->player->x - (g_map->player->dirx / 32)),
+			(g_map->player->y - (g_map->player->diry / 32))))
 	{
 		g_map->player->x -= g_map->player->dirx / 32;
 		g_map->player->y -= g_map->player->diry / 32;
@@ -76,8 +76,8 @@ void	go_back(t_map *g_map)
 void	go_left(t_map *g_map)
 {
 	if (!check_hitbox(g_map,
-			(g_map->player->x + ((sin(g_map->player->pa - (2 * PI / 4))))),
-			(g_map->player->y + ((cos(g_map->player->pa - (PI / 2)))))))
+			(g_map->player->x + ((sin(g_map->player->pa - (2 * PI / 4)) / 32))),
+			(g_map->player->y + ((cos(g_map->player->pa - (PI / 2)) / 32)))))
 	{
 		g_map->player->x += ((cos(g_map->player->pa - (PI / 2))) / 32);
 		g_map->player->y += ((sin(g_map->player->pa - (2 * PI / 4))) / 32);
