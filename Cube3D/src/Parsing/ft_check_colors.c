@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_colors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:10:53 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/08 14:56:55 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/08 15:08:55 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@ static char	*ft_malloc_rgb(char *str, char *rgb, int a)
 			rgb = malloc(sizeof(char) * (b + 1));
 			if (!rgb)
 				return (NULL);
+			return (rgb);
 		}
 		else
 			return (NULL);
-		if (str[a + b] == ',' || str[a + b] == '\n')
-			a++;
-		a = a + b;
 	}
 	return (rgb);
 }
