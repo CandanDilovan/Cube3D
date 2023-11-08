@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO src/img/B.png
+SO src/img/stonewall.png
+WE src/img/stonewall.png
+EA src/img/stonewall.png
 F 86,125,70
 C 135,206,235
 11111111111111111111

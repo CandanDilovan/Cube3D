@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:53:34 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/14 23:25:58 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/07 22:26:40 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int	ft_is_map(char	*line, int *flag)
 	while (line[a])
 	{
 		if (line[a] == ' ' || line[a] == '\t' || line[a] == '1'
-			|| line[a] == '0' || line[a] == 'N' || line[a] == 'W'
-			|| line[a] == 'S' || line[a] == 'E')
+			|| line[a] == '0')
 		{
 			a++;
 			if (line[a] == '\n' || line[a] == '\0')

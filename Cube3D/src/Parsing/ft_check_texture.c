@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:44:11 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/07 16:00:57 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/08 14:25:21 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	ft_load_texture(t_map *g_map)
 {
+	ft_printf("\n%s", g_map->no);
 	g_map->texture->north = mlx_load_png(g_map->no);
 	if (!g_map->texture->north)
 		return (-1);
