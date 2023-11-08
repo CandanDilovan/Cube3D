@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:44:11 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/10/14 14:10:54 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/07 16:00:57 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static int	ft_load_texture(t_map *g_map)
 
 int	ft_textures(t_map *g_map)
 {
-	g_map->texture = malloc(sizeof(t_texture));
 	if (!g_map->texture)
 		return (ft_return_error("malloc failed"));
 	if (ft_load_texture(g_map) == -1)

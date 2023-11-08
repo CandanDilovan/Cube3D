@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:46:42 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/08 14:23:36 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/08 14:25:19 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,22 @@ void	ft_move(void *param)
 			go_front(g_map);
 		if (mlx_is_key_down(m, MLX_KEY_LEFT))
 		{
-			g_map->player->pa -= 0.01;
+			g_map->player->pa -= 0.025;
 			if (g_map->player->pa < 0)
 				g_map->player->pa += 2 * PI;
 			g_map->player->dirx = cos(g_map->player->pa);
 			g_map->player->diry = sin(g_map->player->pa);
-			ft_paint_ray(g_map, g_map->walls);
 		}
 		if (mlx_is_key_down(m, MLX_KEY_RIGHT))
 		{
-			g_map->player->pa += 0.01;
+			g_map->player->pa += 0.025;
 			if (g_map->player->pa > 2 * PI)
 				g_map->player->pa -= 2 * PI;
 			g_map->player->dirx = cos(g_map->player->pa);
 			g_map->player->diry = sin(g_map->player->pa);
-			ft_paint_ray(g_map, g_map->walls);
 		}
 	}
+	ft_paint_ray(g_map, g_map->walls);
 }
 
 void	go_front(t_map *g_map)

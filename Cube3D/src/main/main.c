@@ -6,81 +6,33 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/08 13:41:09 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/08 14:25:35 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-static double	ft_final_touch(t_map *g_map, t_walls *walls)
+static int32_t	ft_set_map(t_map *g_map)
 {
-	double	a;
-
-	a = walls->line;
-	walls->x = g_map->player->x * TILE_SIZE;
-	walls->y = g_map->player->y * TILE_SIZE;
-	walls->wx = walls->x + (walls->anglex * a * TILE_SIZE);
-	walls->wy = walls->y + (walls->angley * a * TILE_SIZE);
-	a = sqrt(((walls->wx - walls->x) * (walls->wx - walls->x))
-			+ ((walls->wy - walls->y) * (walls->wy - walls->y)));
-	walls->lx = (walls->wx - walls->x) / a;
-	walls->ly = (walls->wy - walls->y) / a;
-	return (a);
-}
-
-static void	ft_draw_game(t_map *g_map, t_walls *walls, double a, int r)
-{
-	uint32_t	dstart;
-	uint32_t	dend;
+	mlx_image_t	*background;
+	uint32_t	x;
 	uint32_t	y;
-	int 		jsp;
 
-	y = 0;
-	a = (int)((g_map->height * TILE_SIZE) / walls->line);
-	dstart = (-a / 2) + ((g_map->height * TILE_SIZE) / 2);
-	if (dstart < 0)
-		dstart = 0;
-	dend = (a / 2) + ((g_map->height * TILE_SIZE) / 2);
-	if (dend >= (g_map->height * TILE_SIZE))
-		dend = (g_map->height * TILE_SIZE) - 1;
-	jsp = (r + 1) * ((g_map->widht * TILE_SIZE) / 120);
-	r = r * ((g_map->widht * TILE_SIZE) / 120);
-	while (r < jsp)
+	y = -1;
+	g_map->mlx = mlx_init(WW, WH, "Cube3D", true);
+	background = mlx_new_image(g_map->mlx, WW, WH);
+	while (++y < WH)
 	{
-		y = 0;
-		while (y < (g_map->height * TILE_SIZE))
+		x = -1;
+		while (++x < WW)
 		{
-			if (y < dstart)
-				mlx_put_pixel(g_map->player->ray, r, y, 0x0000FF);
-			if (y >= dstart && y <= dend)
-				mlx_put_pixel(g_map->player->ray, r, y, 0xFFFFFF);
-			else
-				mlx_put_pixel(g_map->player->ray, r, y, 0x0000FF);
-			y++;
+			if (y < WH / 2)
+				mlx_put_pixel(background, x, y,
+					ft_get_colors(g_map->texture->ceilling));
+			else if (y > WH / 2)
+				mlx_put_pixel(background, x, y,
+					ft_get_colors(g_map->texture->floor));
 		}
-		r++;
-	}
-}
-
-void	ft_paint_ray(t_map *g_map, t_walls **walls)
-{
-	int		r;
-	double	a;
-	double	ra;
-
-	r = -1;
-	a = 0.0;
-	if (g_map->player->ray)
-		mlx_delete_image(g_map->mlx, g_map->player->ray);
-	g_map->player->ray = mlx_new_image(g_map->mlx,
-			(g_map->widht * TILE_SIZE), (g_map->height * TILE_SIZE));
-	ra = g_map->player->pa - ((DR * 2) * 30);
-	while (++r < 120)
-	{
-		ft_check_walls_ud(g_map, ra, r);
-		ft_final_touch(g_map, walls[r]);
-		ft_draw_game(g_map, g_map->walls[r], a, r);
-		ra += DR;
 	}
 	mlx_image_to_window(g_map->mlx, g_map->player->ray, 0, 0);
 }
@@ -159,34 +111,48 @@ static int32_t	ft_set_map(t_map *g_map)
 	return (0);
 }
 
-int	main(int argc, char **argv)
+static t_map	*ft_parsing_verif(int argc, char **argv)
 {
 	t_map	*g_map;
 
 	if (argc < 2)
-		return (ft_return_error("Error : too few arguments"));
+		return (ft_return_error("Error : too few arguments"), NULL);
 	if (ft_is_cub(argv[1]) == -1)
-		return (ft_return_error("Error : map is not .cub"));
+		return (ft_return_error("Error : map is not .cub"), NULL);
 	else
 	{
 		g_map = malloc(sizeof(t_map));
 		if (!g_map)
-			return (-1);
+			return (NULL);
 		g_map->player = malloc(sizeof(t_player));
-		g_map->walls = malloc(sizeof(t_walls *) * 120);
+		g_map->walls = malloc(sizeof(t_walls));
+		g_map->texture = malloc(sizeof(t_texture));
 		if (map_count(g_map, argv[1]) == -1 || ft_int_map(g_map) == -1)
-			return (free(g_map), ft_return_error("Error : FD failed"));
+			return (free(g_map), ft_return_error("Error : FD failed"), NULL);
 		if (ft_no_void(g_map) == -1)
-			return (-1);
+			return (NULL);
 		// if (ft_textures(g_map) == -1)
-			// return (-1);
-		//ft_print_intmap(g_map);
-		g_map->player->x = 1.5;
-		g_map->player->y = 1.5;
-		g_map->player->pa = 0;
-		g_map->player->dirx = cos(g_map->player->pa);
-		g_map->player->diry = sin(g_map->player->pa);
+		// 	return (NULL);
 	}
+	return (g_map);
+}
+
+int	main(int argc, char **argv)
+{
+	t_map	*g_map;
+
+	g_map = ft_parsing_verif(argc, argv);
+	if (!g_map)
+		return (-1);
+	g_map->player->x = 1.5;
+	g_map->player->y = 1.5;
+	g_map->player->pa = 0;
+	g_map->player->dirx = cos(g_map->player->pa);
+	g_map->player->diry = sin(g_map->player->pa);
+	g_map->texture->ceilling = ft_rgb(g_map->c);
+	g_map->texture->floor = ft_rgb(g_map->f);
+	if (!g_map->texture->ceilling || !g_map->texture->floor)
+		return (ft_return_error("Something's wrong with colors"));
 	ft_set_map(g_map);
 	mlx_loop_hook(g_map->mlx, ft_move, g_map);
 	mlx_loop(g_map->mlx);
