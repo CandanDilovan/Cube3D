@@ -5,10 +5,11 @@
 #                                                     +:+ +:+         +:+      #
 #    By: babels <babels@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/25 15:27:08 by dilovancand       #+#    #+#              #
-#    Updated: 2023/11/09 15:58:40 by babels           ###   ########.fr        #
+#    Created: Invalid date        by                   #+#    #+#              #
+#    Updated: 2023/11/09 16:48:12 by babels           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME = Cube3D
 SOURCES = src/main/main.c src/main/ft_check_up_down.c src/main/ft_draw.c \

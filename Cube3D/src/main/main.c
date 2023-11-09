@@ -6,7 +6,7 @@
 /*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/09 16:38:35 by babels           ###   ########.fr       */
+/*   Updated: 2023/11/09 16:48:31 by babels           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ static t_map	*ft_parsing_verif(int argc, char **argv)
 			return (free(g_map), ft_return_error("Error : FD failed"), NULL);
 		if (ft_no_void(g_map) == -1)
 			return (NULL);
-		// if (ft_textures(g_map) == -1)
-		// 	return (NULL);
+		if (ft_textures(g_map) == -1)
+			return (NULL);
 	}
 	return (g_map);
 }
