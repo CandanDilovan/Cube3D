@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:46:42 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/08 16:07:27 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/09 13:22:16 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_move(void *param)
 		mlx_close_window(m);
 	if (g_map)
 	{
+		mouse_hook(g_map);
 		if (mlx_is_key_down(m, MLX_KEY_A) && !mlx_is_key_down(m, MLX_KEY_D))
 			go_left(g_map);
 		if (mlx_is_key_down(m, MLX_KEY_D) && !mlx_is_key_down(m, MLX_KEY_A))
@@ -32,21 +33,9 @@ void	ft_move(void *param)
 		if (mlx_is_key_down(m, MLX_KEY_W) && !mlx_is_key_down(m, MLX_KEY_S))
 			go_front(g_map);
 		if (mlx_is_key_down(m, MLX_KEY_LEFT))
-		{
-			g_map->player->pa -= 0.025;
-			if (g_map->player->pa < 0)
-				g_map->player->pa += 2 * PI;
-			g_map->player->dirx = cos(g_map->player->pa);
-			g_map->player->diry = sin(g_map->player->pa);
-		}
+			rotate_left(g_map, 0);
 		if (mlx_is_key_down(m, MLX_KEY_RIGHT))
-		{
-			g_map->player->pa += 0.025;
-			if (g_map->player->pa > 2 * PI)
-				g_map->player->pa -= 2 * PI;
-			g_map->player->dirx = cos(g_map->player->pa);
-			g_map->player->diry = sin(g_map->player->pa);
-		}
+			rotate_right(g_map, 0);
 	}
 	ft_paint_ray(g_map, g_map->walls);
 }
