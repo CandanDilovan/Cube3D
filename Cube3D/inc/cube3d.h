@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:39:54 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/07 22:34:25 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/09 13:38:14 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct a_map
 	char		*f;
 	char		*c;
 	int			error;
+	int			mouse;
+	int			mouse_moved;
 	t_texture	*texture;
 	mlx_image_t	*img;
 	t_player	*player;
@@ -119,4 +121,8 @@ void		go_left(t_map *g_map);
 void		go_left(t_map *g_map);
 void		go_right(t_map *g_map);
 int			check_hitbox(t_map *g_map, double player_x, double player_y);
+void		mouse_hook(t_map *g_map);
+void		mouse_on_off(t_map *g_map);
+void		rotate_left(t_map *g_map, double rotspeed);
+void		rotate_right(t_map *g_map, double rotspeed);
 #endif

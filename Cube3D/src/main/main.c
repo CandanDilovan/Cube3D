@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/08 15:28:54 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/09 13:45:51 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void	ft_set_map(t_map *g_map)
 	y = -1;
 	g_map->mlx = mlx_init(WW, WH, "Cube3D", true);
 	background = mlx_new_image(g_map->mlx, WW, WH);
+	printf("\nPress 'M' to enable mouse and 'N' to disable it\n");
+	mlx_set_mouse_pos(g_map->mlx, WW / 2, WH / 2);
 	while (++y < WH)
 	{
 		x = -1;
@@ -77,6 +79,8 @@ int	main(int argc, char **argv)
 	g_map->player->diry = sin(g_map->player->pa);
 	g_map->texture->ceilling = ft_rgb(g_map->c);
 	g_map->texture->floor = ft_rgb(g_map->f);
+	g_map->mouse = 0;
+	g_map->mouse_moved = 0;
 	if (!g_map->texture->ceilling || !g_map->texture->floor)
 		return (ft_return_error("Something's wrong with colors"));
 	ft_set_map(g_map);
