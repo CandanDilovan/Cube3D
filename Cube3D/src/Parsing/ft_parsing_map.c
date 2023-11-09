@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:53:34 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/07 22:26:40 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/09 16:32:56 by babels           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_is_map(char	*line, int *flag)
 	while (line[a])
 	{
 		if (line[a] == ' ' || line[a] == '\t' || line[a] == '1'
-			|| line[a] == '0')
+			|| line[a] == '0' || line[a] == 'N' || line[a] == 'S' || line[a] == 'W' || line[a] == 'E')
 		{
 			a++;
 			if (line[a] == '\n' || line[a] == '\0')

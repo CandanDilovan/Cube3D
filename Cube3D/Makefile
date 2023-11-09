@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aabel <aabel@student.42.fr>                +#+  +:+       +#+         #
+#    By: babels <babels@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/25 15:27:08 by dilovancand       #+#    #+#              #
-#    Updated: 2023/11/09 12:30:15 by aabel            ###   ########.fr        #
+#    Updated: 2023/11/09 15:58:40 by babels           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Cube3D
 SOURCES = src/main/main.c src/main/ft_check_up_down.c src/main/ft_draw.c \
 		src/Parsing/ft_parsing.c src/Parsing/ft_parsing_texture.c src/Parsing/ft_parsing_map.c src/Parsing/ft_return_error.c src/Parsing/ft_check_texture.c src/Parsing/ft_check_colors.c\
-		src/move_hitbox/hitbox.c src/move_hitbox/move.c src/move_hitbox/rotate.c \
+		src/move_hitbox/hitbox.c src/move_hitbox/move.c src/move_hitbox/rotate.c src/move_hitbox/player_start.c \
 			
 OBJECTS = $(SOURCES:.c=.o)
 
