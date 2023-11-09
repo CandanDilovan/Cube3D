@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/09 13:45:51 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/09 14:50:03 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ static t_map	*ft_parsing_verif(int argc, char **argv)
 			return (free(g_map), ft_return_error("Error : FD failed"), NULL);
 		if (ft_no_void(g_map) == -1)
 			return (NULL);
-		// if (ft_textures(g_map) == -1)
-		// 	return (NULL);
+		if (ft_textures(g_map) == -1)
+			return (NULL);
 	}
 	return (g_map);
 }

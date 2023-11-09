@@ -6,11 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 06:56:57 by dilovancand       #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/11/08 16:07:46 by dilovancand      ###   ########.fr       */
-=======
-/*   Updated: 2023/11/09 11:53:21 by aabel            ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Updated: 2023/11/09 14:49:48 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +53,7 @@ static int	ft_strlen_cube(char *str, int a)
 	b = 0;
 	while (str[a + b] && (str[a + b] == ' ' || str[a + b] == '\t'))
 		a++;
-	while (str[a + b])
+	while (str[a + b] && str[a + b] != '\n')
 		b++;
 	return (b);
 }
@@ -75,7 +71,7 @@ static char	*ft_texture_path(char *line, int a)
 	while (line[a + b] && (line[a + b] == ' ' || line[a + b] == '\t'
 			|| line[a + b] == '.' || line[a + b] == '/'))
 		a++;
-	while (line[a + b])
+	while (line[a + b] && line[a + b] != '\n')
 	{
 		str[b] = line[a + b];
 		b++;
