@@ -22,8 +22,8 @@ CFLAGS = -Wall -Wextra -Werror
 LIBFT_LIB = inc/libft/libft.a
 INC_DIR = inc/
 MLX42 = ../Cube3D/MLX42/build/libmlx42.a
-# MLXSRC = -Iinclude -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.8/lib/"
-MLXSRC = -Iinclude -lglfw -L"/Users/aabel/.brew/opt/glfw/lib/"
+MLXSRC = -Iinclude -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.8/lib/"
+# MLXSRC = -Iinclude -lglfw -L"/Users/aabel/.brew/opt/glfw/lib/"
 
 CFLAGS = -Wall -Wextra -Werror
 MLXFLAG = -framework Cocoa -framework OpenGL -framework IOKit
