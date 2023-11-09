@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/09 12:44:47 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/09 13:45:51 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	ft_set_map(t_map *g_map)
 	y = -1;
 	g_map->mlx = mlx_init(WW, WH, "Cube3D", true);
 	background = mlx_new_image(g_map->mlx, WW, WH);
+	printf("\nPress 'M' to enable mouse and 'N' to disable it\n");
 	mlx_set_mouse_pos(g_map->mlx, WW / 2, WH / 2);
-	
 	while (++y < WH)
 	{
 		x = -1;
