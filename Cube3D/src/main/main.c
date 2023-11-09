@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/09 14:50:03 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/09 16:48:31 by babels           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,41 @@ static t_map	*ft_parsing_verif(int argc, char **argv)
 	return (g_map);
 }
 
+void	init_player(t_map *g_map)
+{
+	int	y;
+	int	x;
+
+	find_spawn(g_map->map, &y, &x);
+	g_map->player->x = x + 0.5;
+	g_map->player->y = y + 0.5;
+	// g_map->player->pa = 0;
+	setup_start_dir(g_map, g_map->map[y][x]);
+	g_map->player->dirx = cos(g_map->player->pa);
+	g_map->player->diry = sin(g_map->player->pa);
+}
+
+void	find_spawn(char **map, int *x, int *y)
+{
+	*x = 0;
+	*y = 0;
+	if (!map)
+		return ;
+	while (map[*x])
+	{
+		*y = 0;
+		while (map[*x][*y])
+		{
+			if (map[*x][*y] == 'N' || map[*x][*y] == 'E'
+				|| map[*x][*y] == 'W' || map[*x][*y] == 'S')
+				return ;
+			(*y)++;
+		}
+		*y = 0;
+		(*x)++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_map	*g_map;
@@ -72,11 +107,12 @@ int	main(int argc, char **argv)
 	g_map = ft_parsing_verif(argc, argv);
 	if (!g_map)
 		return (-1);
-	g_map->player->x = 1.5;
-	g_map->player->y = 1.5;
-	g_map->player->pa = 0;
-	g_map->player->dirx = cos(g_map->player->pa);
-	g_map->player->diry = sin(g_map->player->pa);
+	init_player(g_map);
+	// g_map->player->x = 1.5;
+	// g_map->player->y = 1.5;
+	// g_map->player->pa = 0;
+	// g_map->player->dirx = cos(g_map->player->pa);
+	// g_map->player->diry = sin(g_map->player->pa);
 	g_map->texture->ceilling = ft_rgb(g_map->c);
 	g_map->texture->floor = ft_rgb(g_map->f);
 	g_map->mouse = 0;

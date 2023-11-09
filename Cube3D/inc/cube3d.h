@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:39:54 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/09 13:38:14 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/09 16:09:42 by babels           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void		ft_lowest(t_map *g_map);
 void		ft_paint_ray(t_map *g_map, t_walls *walls);
 
 //move_hitbox
-
 void		ft_move(void *param);
 void		go_front(t_map *g_map);
 void		go_back(t_map *g_map);
@@ -125,4 +124,13 @@ void		mouse_hook(t_map *g_map);
 void		mouse_on_off(t_map *g_map);
 void		rotate_left(t_map *g_map, double rotspeed);
 void		rotate_right(t_map *g_map, double rotspeed);
+void		setup_start_dir(t_map *g_map, char direction);
+void		set_south(t_map *g_map);
+void		set_north(t_map *g_map);
+void		set_east(t_map *g_map);
+void		set_west(t_map *g_map);
+
+//init
+void	init_player(t_map *g_map);
+void	find_spawn(char **map, int *x, int *y);
 #endif
