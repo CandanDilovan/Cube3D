@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/09 16:48:31 by babels           ###   ########.fr       */
+/*   Updated: 2023/11/14 21:15:43 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static t_map	*ft_parsing_verif(int argc, char **argv)
 			return (NULL);
 		g_map->player = malloc(sizeof(t_player));
 		g_map->walls = malloc(sizeof(t_walls));
-		g_map->texture = malloc(sizeof(t_texture));
 		if (map_count(g_map, argv[1]) == -1 || ft_int_map(g_map) == -1)
 			return (free(g_map), ft_return_error("Error : FD failed"), NULL);
 		if (ft_no_void(g_map) == -1)
@@ -73,10 +72,11 @@ void	init_player(t_map *g_map)
 	find_spawn(g_map->map, &y, &x);
 	g_map->player->x = x + 0.5;
 	g_map->player->y = y + 0.5;
-	// g_map->player->pa = 0;
 	setup_start_dir(g_map, g_map->map[y][x]);
 	g_map->player->dirx = cos(g_map->player->pa);
 	g_map->player->diry = sin(g_map->player->pa);
+	g_map->texture->time = 2.0;
+	g_map->texture->flag = 0;
 }
 
 void	find_spawn(char **map, int *x, int *y)
@@ -108,11 +108,6 @@ int	main(int argc, char **argv)
 	if (!g_map)
 		return (-1);
 	init_player(g_map);
-	// g_map->player->x = 1.5;
-	// g_map->player->y = 1.5;
-	// g_map->player->pa = 0;
-	// g_map->player->dirx = cos(g_map->player->pa);
-	// g_map->player->diry = sin(g_map->player->pa);
 	g_map->texture->ceilling = ft_rgb(g_map->c);
 	g_map->texture->floor = ft_rgb(g_map->f);
 	g_map->mouse = 0;

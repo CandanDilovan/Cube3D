@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 06:56:57 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/09 14:49:48 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/14 21:10:41 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,15 @@ int	ft_int_map(t_map *g_map)
 	return (0);
 }
 
-static int	ft_strlen_cube(char *str, int a)
+static int	ft_strlen_cube(char *line, int a)
 {
 	int	b;
 
 	b = 0;
-	while (str[a + b] && (str[a + b] == ' ' || str[a + b] == '\t'))
+	while (line[a + b] && (line[a + b] == ' ' || line[a + b] == '\t'
+			|| line[a + b] == '.' || line[a + b] == '/'))
 		a++;
-	while (str[a + b] && str[a + b] != '\n')
+	while (line[a + b] && line[a + b] >= 33 && line[a + b] <= 126)
 		b++;
 	return (b);
 }
@@ -71,7 +72,7 @@ static char	*ft_texture_path(char *line, int a)
 	while (line[a + b] && (line[a + b] == ' ' || line[a + b] == '\t'
 			|| line[a + b] == '.' || line[a + b] == '/'))
 		a++;
-	while (line[a + b] && line[a + b] != '\n')
+	while (line[a + b] && line[a + b] >= 33 && line[a + b] <= 126)
 	{
 		str[b] = line[a + b];
 		b++;
@@ -80,24 +81,31 @@ static char	*ft_texture_path(char *line, int a)
 	return (str);
 }
 
-int	ft_identify_texture(t_map *g_map, char *line)
+void	ft_identify_texture(t_map *g_map, char *line)
 {
 	int	a;
 
 	a = 0;
 	while (line[a] && (line[a] == ' ' || line[a] == '\t'))
 		a++;
-	if (line[a] == 'N' && line[a + 1] == 'O')
-		g_map->no = ft_texture_path(line, (a + 2));
-	else if (line[a] == 'W' && line[a + 1] == 'E')
-		g_map->we = ft_texture_path(line, (a + 2));
-	else if (line[a] == 'S' && line[a + 1] == 'O')
-		g_map->so = ft_texture_path(line, (a + 2));
-	else if (line[a] == 'E' && line[a + 1] == 'A')
-		g_map->ea = ft_texture_path(line, (a + 2));
+	if (line[a] == 'N' && line[a + 1] == 'O' && line[a + 2] == '1')
+		g_map->no = ft_texture_path(line, (a + 3));
+	else if (line[a] == 'W' && line[a + 1] == 'E' && line[a + 2] == '1')
+		g_map->we = ft_texture_path(line, (a + 3));
+	else if (line[a] == 'S' && line[a + 1] == 'O' && line[a + 2] == '1')
+		g_map->so = ft_texture_path(line, (a + 3));
+	else if (line[a] == 'E' && line[a + 1] == 'A' && line[a + 2] == '1')
+		g_map->ea = ft_texture_path(line, (a + 3));
+	else if (line[a] == 'N' && line[a + 1] == 'O' && line[a + 2] == '2')
+		g_map->no2 = ft_texture_path(line, (a + 3));
+	else if (line[a] == 'W' && line[a + 1] == 'E' && line[a + 2] == '2')
+		g_map->we2 = ft_texture_path(line, (a + 3));
+	else if (line[a] == 'S' && line[a + 1] == 'O' && line[a + 2] == '2')
+		g_map->so2 = ft_texture_path(line, (a + 3));
+	else if (line[a] == 'E' && line[a + 1] == 'A' && line[a + 2] == '2')
+		g_map->ea2 = ft_texture_path(line, (a + 3));
 	else if (line[a] == 'F')
 		g_map->f = ft_texture_path(line, (a + 1));
 	else if (line[a] == 'C')
 		g_map->c = ft_texture_path(line, (a + 1));
-	return (0);
 }

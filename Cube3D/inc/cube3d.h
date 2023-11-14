@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:39:54 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/14 15:32:25 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/14 21:06:09 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@
 
 typedef struct a_texture
 {
-	mlx_texture_t	*north;
-	mlx_texture_t	*south;
-	mlx_texture_t	*west;
-	mlx_texture_t	*east;
+	mlx_texture_t	**north;
+	mlx_texture_t	**south;
+	mlx_texture_t	**west;
+	mlx_texture_t	**east;
 	int				*ceilling;
 	int				*floor;
 	int				side;
@@ -41,6 +41,8 @@ typedef struct a_texture
 	int				tex_y;
 	double			tex_pos;
 	double			tex_step;
+	double			time;
+	int				flag;
 }				t_texture;
 
 typedef struct a_player
@@ -85,6 +87,10 @@ typedef struct a_map
 	char		*so;
 	char		*we;
 	char		*ea;
+	char		*no2;
+	char		*so2;
+	char		*we2;
+	char		*ea2;
 	char		*f;
 	char		*c;
 	int			error;
@@ -106,7 +112,7 @@ int			ft_int_map(t_map *g_map);
 int			*ft_rgb(char *str);
 
 //texture
-int			ft_identify_texture(t_map *g_map, char *line);
+void		ft_identify_texture(t_map *g_map, char *line);
 int			ft_textures(t_map *g_map);
 uint32_t	ft_get_colors(int *rgb);
 uint32_t	ft_get_pixel(t_map *g_map);

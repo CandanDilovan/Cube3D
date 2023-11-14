@@ -6,11 +6,32 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 22:42:11 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/14 15:54:00 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/14 21:28:42 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+static int	ft_time(void)
+{
+	double	time;
+
+	time = mlx_get_time();
+	time = floor(time);
+	return (time);
+}
+
+static void	ft_change(t_map *g_map)
+{
+	if (g_map->texture->time < ft_time())
+	{
+		g_map->texture->time = ft_time() + 0.5;
+		if (g_map->texture->flag == 1)
+			g_map->texture->flag = 0;
+		else if (g_map->texture->flag == 0)
+			g_map->texture->flag = 1;
+	}
+}
 
 static uint32_t	ft_colors(uint32_t colors)
 {
@@ -29,13 +50,13 @@ static uint32_t	ft_colors(uint32_t colors)
 static mlx_texture_t	*ft_tex_selector(t_map *g_map)
 {
 	if (g_map->texture->side == 'W')
-		return (g_map->texture->west);
+		return (g_map->texture->west[g_map->texture->flag]);
 	else if (g_map->texture->side == 'E')
-		return (g_map->texture->east);
+		return (g_map->texture->east[g_map->texture->flag]);
 	else if (g_map->texture->side == 'N')
-		return (g_map->texture->north);
+		return (g_map->texture->north[g_map->texture->flag]);
 	else if (g_map->texture->side == 'S')
-		return (g_map->texture->south);
+		return (g_map->texture->south[g_map->texture->flag]);
 	else
 		return (NULL);
 }
@@ -71,4 +92,5 @@ void	ft_draw_walls(t_map *g_map, int dstart, int line_h)
 	g_map->texture->tex_step = 1.0 * TEX_SIZE / line_h;
 	g_map->texture->tex_pos = (dstart - WH / 2 + line_h / 2)
 		* g_map->texture->tex_step;
+	ft_change(g_map);
 }
