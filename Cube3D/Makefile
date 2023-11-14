@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: babels <babels@student.42.fr>              +#+  +:+       +#+         #
+#    By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/11/09 16:48:12 by babels           ###   ########.fr        #
+#    Updated: 2023/11/14 15:06:23 by dilovancand      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = Cube3D
-SOURCES = src/main/main.c src/main/ft_check_up_down.c src/main/ft_draw.c \
+SOURCES = src/main/main.c src/main/ft_check_up_down.c src/main/ft_draw.c src/main/ft_texture.c \
 		src/Parsing/ft_parsing.c src/Parsing/ft_parsing_texture.c src/Parsing/ft_parsing_map.c src/Parsing/ft_return_error.c src/Parsing/ft_check_texture.c src/Parsing/ft_check_colors.c\
 		src/move_hitbox/hitbox.c src/move_hitbox/move.c src/move_hitbox/rotate.c src/move_hitbox/player_start.c \
 			

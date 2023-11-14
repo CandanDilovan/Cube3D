@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:39:54 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/09 16:09:42 by babels           ###   ########.fr       */
+/*   Updated: 2023/11/14 15:32:25 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define DR 0.0174533
 # define WH	720
 # define WW	1280
+# define TEX_SIZE 64
 
 # define TILE_SIZE 64
 
@@ -35,6 +36,11 @@ typedef struct a_texture
 	mlx_texture_t	*east;
 	int				*ceilling;
 	int				*floor;
+	int				side;
+	int				tex_x;
+	int				tex_y;
+	double			tex_pos;
+	double			tex_step;
 }				t_texture;
 
 typedef struct a_player
@@ -103,6 +109,8 @@ int			*ft_rgb(char *str);
 int			ft_identify_texture(t_map *g_map, char *line);
 int			ft_textures(t_map *g_map);
 uint32_t	ft_get_colors(int *rgb);
+uint32_t	ft_get_pixel(t_map *g_map);
+void		ft_draw_walls(t_map *g_map, int dstart, int line_h);
 
 //print_error
 int			ft_return_error(char *str);
@@ -131,6 +139,7 @@ void		set_east(t_map *g_map);
 void		set_west(t_map *g_map);
 
 //init
-void	init_player(t_map *g_map);
-void	find_spawn(char **map, int *x, int *y);
+void		init_player(t_map *g_map);
+void		find_spawn(char **map, int *x, int *y);
+
 #endif

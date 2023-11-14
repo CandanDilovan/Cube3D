@@ -1,7 +1,7 @@
-NO src/img/Blue64.png
+NO src/img/stonewall.png
 SO src/img/stonewall.png
-WE src/img/stonewall.png
-EA src/img/stonewall.png
+WE src/img/Blue64.png
+EA src/img/Blue64.png
 F 86,125,70
 C 135,206,235
 11111111111111111111
