@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:46:42 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/09 14:46:51 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/10 15:35:45 by babels           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	ft_move(void *param)
 void	go_front(t_map *g_map)
 {
 	if (!check_hitbox(g_map,
-			((g_map->player->x) + ((g_map->player->dirx / 64))),
-			((g_map->player->y) + ((g_map->player->diry / 64)))))
+			((g_map->player->x) + ((g_map->player->dirx / 4))),
+			((g_map->player->y) + ((g_map->player->diry / 4)))))
 	{
 		g_map->player->x += g_map->player->dirx / 64;
 		g_map->player->y += g_map->player->diry / 64;
@@ -54,8 +54,8 @@ void	go_front(t_map *g_map)
 void	go_back(t_map *g_map)
 {
 	if (!check_hitbox(g_map,
-			((g_map->player->x) - (g_map->player->dirx / 64)),
-			((g_map->player->y) - (g_map->player->diry / 64))))
+			((g_map->player->x) - (g_map->player->dirx / 4)),
+			((g_map->player->y) - (g_map->player->diry / 4))))
 	{
 		g_map->player->x -= g_map->player->dirx / 64;
 		g_map->player->y -= g_map->player->diry / 64;
@@ -66,9 +66,9 @@ void	go_left(t_map *g_map)
 {
 	if (!check_hitbox(g_map,
 			((g_map->player->x)
-				+ ((cos(g_map->player->pa - (2 * PI / 4)) / 64))),
+				+ ((cos(g_map->player->pa - (2 * PI / 4)) / 4))),
 			((g_map->player->y)
-				+ ((sin(g_map->player->pa - (PI / 2)) / 64)))))
+				+ ((sin(g_map->player->pa - (PI / 2)) / 4)))))
 	{
 		g_map->player->x += ((cos(g_map->player->pa - (PI / 2))) / 64);
 		g_map->player->y += ((sin(g_map->player->pa - (2 * PI / 4))) / 64);
@@ -79,9 +79,9 @@ void	go_right(t_map *g_map)
 {
 	if (!check_hitbox(g_map,
 			((g_map->player->x)
-				+ ((cos(g_map->player->pa + (2 * PI / 4)) / 64))),
+				+ ((cos(g_map->player->pa + (2 * PI / 4)) / 4))),
 			((g_map->player->y)
-				+ ((sin(g_map->player->pa + (PI / 2)) / 64)))))
+				+ ((sin(g_map->player->pa + (PI / 2)) / 4)))))
 	{
 		g_map->player->x += ((cos(g_map->player->pa + (PI / 2))) / 64);
 		g_map->player->y += ((sin(g_map->player->pa + (2 * PI / 4))) / 64);
