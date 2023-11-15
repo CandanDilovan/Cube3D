@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_texture.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:44:11 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/08 14:25:21 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/14 15:59:59 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ static int	ft_load_texture(t_map *g_map)
 		return (-1);
 	g_map->texture->west = mlx_load_png(g_map->we);
 	if (!g_map->texture->west)
+		return (-1);
+	g_map->texture->door = mlx_load_png("src/img/stonewall.png");
+	if (!g_map->texture->door)
 		return (-1);
 	return (0);
 }

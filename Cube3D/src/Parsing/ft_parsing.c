@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:46:09 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/09 16:48:52 by babels           ###   ########.fr       */
+/*   Updated: 2023/11/14 14:32:41 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static int	ft_hole_in_one(t_map *g_map, uint32_t y, uint32_t x)
 {
 	if (g_map->map[y][x] && (g_map->map[y][x] == '1' || g_map->map[y][x] == '0'
 		|| g_map->map[y][x] == 'N' || g_map->map[y][x] == 'S'
-		|| g_map->map[y][x] == 'E' || g_map->map[y][x] == 'W'))
+		|| g_map->map[y][x] == 'E' || g_map->map[y][x] == 'W'
+		|| g_map->map[y][x] == 'D'))
 		return (0);
 	else
 		return (-1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 07:49:41 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/09 16:48:31 by babels           ###   ########.fr       */
+/*   Updated: 2023/11/15 12:15:01 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	init_player(t_map *g_map)
 	find_spawn(g_map->map, &y, &x);
 	g_map->player->x = x + 0.5;
 	g_map->player->y = y + 0.5;
-	// g_map->player->pa = 0;
 	setup_start_dir(g_map, g_map->map[y][x]);
 	g_map->player->dirx = cos(g_map->player->pa);
 	g_map->player->diry = sin(g_map->player->pa);
@@ -108,11 +107,7 @@ int	main(int argc, char **argv)
 	if (!g_map)
 		return (-1);
 	init_player(g_map);
-	// g_map->player->x = 1.5;
-	// g_map->player->y = 1.5;
-	// g_map->player->pa = 0;
-	// g_map->player->dirx = cos(g_map->player->pa);
-	// g_map->player->diry = sin(g_map->player->pa);
+	// init_door(g_map);
 	g_map->texture->ceilling = ft_rgb(g_map->c);
 	g_map->texture->floor = ft_rgb(g_map->f);
 	g_map->mouse = 0;
@@ -122,6 +117,7 @@ int	main(int argc, char **argv)
 	ft_set_map(g_map);
 	g_map->player->ray = mlx_new_image(g_map->mlx, WW, WH);
 	mlx_image_to_window(g_map->mlx, g_map->player->ray, 0, 0);
+	// mlx_image_to_window(g_map->mlx, g_map->texture->door, 0, 0);
 	mlx_loop_hook(g_map->mlx, ft_move, g_map);
 	mlx_loop(g_map->mlx);
 	mlx_terminate(g_map->mlx);

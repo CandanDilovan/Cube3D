@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:39:54 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/09 16:09:42 by babels           ###   ########.fr       */
+/*   Updated: 2023/11/15 12:10:42 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@
 
 # define TILE_SIZE 64
 
+typedef struct s_doors
+{
+	int			x;
+	int			y;
+	int			state;
+	double		current_img;
+}				t_doors;
+
 typedef struct a_texture
 {
 	mlx_texture_t	*north;
@@ -35,6 +43,7 @@ typedef struct a_texture
 	mlx_texture_t	*east;
 	int				*ceilling;
 	int				*floor;
+	mlx_texture_t	*door;
 }				t_texture;
 
 typedef struct a_player
@@ -88,6 +97,7 @@ typedef struct a_map
 	mlx_image_t	*img;
 	t_player	*player;
 	t_walls		*walls;
+	t_doors		*doors;
 }				t_map;
 
 //map
@@ -131,6 +141,12 @@ void		set_east(t_map *g_map);
 void		set_west(t_map *g_map);
 
 //init
-void	init_player(t_map *g_map);
-void	find_spawn(char **map, int *x, int *y);
+void		init_player(t_map *g_map);
+void		find_spawn(char **map, int *x, int *y);
+
+//doors
+void		init_door(t_map *g_map);
+int			count_doors(t_map *g_map);
+t_doors		*create_door(int x, int y);
+int			player_range_door(t_map *g_map);
 #endif
