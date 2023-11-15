@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/11/15 14:23:52 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 15:44:38 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	main(int argc, char **argv)
 	if (!g_map)
 		return (-1);
 	init_player(g_map);
-	// init_door(g_map);
+	init_door(g_map);
 	g_map->texture->ceilling = ft_rgb(g_map->c);
 	g_map->texture->floor = ft_rgb(g_map->f);
 	g_map->mouse = 0;

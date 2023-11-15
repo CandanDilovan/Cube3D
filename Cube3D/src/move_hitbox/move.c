@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:46:42 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/15 14:24:56 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 15:37:41 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	ft_move(void *param)
 	m = g_map->mlx;
 	if (mlx_is_key_down(m, MLX_KEY_ESCAPE))
 		mlx_close_window(m);
-	// if (player_range_door(g_map) == 1)
-	// {
-	// 	// open_door(g_map);
-	// 	printf("Door opened\n");
-	// }
+	if (player_range_door(g_map) == 1)
+	{
+		// open_door(g_map);
+		printf("Door opened\n");
+	}
 	if (g_map)
 	{
 		mouse_hook(g_map);
