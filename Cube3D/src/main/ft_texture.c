@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 22:42:11 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/15 12:30:40 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 13:27:32 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static mlx_texture_t	*ft_tex_selector(t_map *g_map)
 		return (g_map->texture->north[g_map->texture->flag]);
 	else if (g_map->texture->side == 'S')
 		return (g_map->texture->south[g_map->texture->flag]);
+	else if (g_map->texture->side == 'D')
+		return (g_map->texture->door);
 	else
 		return (NULL);
 }

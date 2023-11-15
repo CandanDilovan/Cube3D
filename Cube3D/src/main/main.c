@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/11/15 12:24:02 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 13:37:30 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	main(int argc, char **argv)
 	if (!g_map)
 		return (-1);
 	init_player(g_map);
-	// init_door(g_map);
+	init_door(g_map);
 	g_map->texture->ceilling = ft_rgb(g_map->c);
 	g_map->texture->floor = ft_rgb(g_map->f);
 	g_map->mouse = 0;
@@ -120,7 +120,7 @@ int	main(int argc, char **argv)
 	ft_set_map(g_map);
 	g_map->player->ray = mlx_new_image(g_map->mlx, WW, WH);
 	mlx_image_to_window(g_map->mlx, g_map->player->ray, 0, 0);
-	// mlx_image_to_window(g_map->mlx, g_map->texture->door, 0, 0);
+	// mlx_image_to_window(g_map->mlx, g_map->texture->door_img, 0, 0);
 	mlx_loop_hook(g_map->mlx, ft_move, g_map);
 	mlx_loop(g_map->mlx);
 	mlx_terminate(g_map->mlx);

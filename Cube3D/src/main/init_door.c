@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:46:26 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/15 12:14:29 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 13:40:08 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 void	init_door(t_map *g_map)
 {
-	int	i;
-	int	x;
-	int	y;
+	int			i;
+	uint32_t	x;
+	uint32_t	y;
 
 	i = -1;
-	x = -1;
 	y = -1;
 
-	g_map->doors = malloc(sizeof(t_doors *) * (count_doors(g_map) + 1));
-	while (g_map->map[++y])
+	g_map->doors = malloc(sizeof(t_doors *) * (count_doors(g_map)));
+	while (++y < g_map->height)
 	{
-		while (g_map->map[y][++x])
+		x = -1;
+		while (++x < g_map->widht)
 			if (g_map->map[y][x] == 'D')
 				g_map->doors[++i] = *create_door(x, y);
-			x = -1;
 	}
-	// g_map->doors[i + 1] = NULL;
 }
 
 int	count_doors(t_map *g_map)
@@ -60,7 +58,7 @@ t_doors	*create_door(int x, int y)
 		return (NULL);
 	door->x = x;
 	door->y = y;
-	door->state = 'C';
+	door->state = 'D';
 	door->current_img = 0;
 	return (door);
 }

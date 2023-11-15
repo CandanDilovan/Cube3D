@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_up_down.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:22:17 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/13 16:29:35 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/15 13:29:29 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	ft_dda_comp(t_map *g_map, t_walls *walls, int *is_wall, int touched)
 		else
 			walls->line = (walls->sdx - walls->ddx);
 	}
+	else if (g_map->map[walls->my][walls->mx] == 'D')
+		g_map->texture->side = 'D';
 }
 
 static void	ft_side(t_map *g_map, t_walls *walls, int who)

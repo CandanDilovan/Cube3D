@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:44:11 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/15 12:17:29 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 13:24:26 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static int	ft_load_texture(t_map *g_map)
 	if (!g_map->texture->west[0])
 		return (-1);
 	g_map->texture->door = mlx_load_png("src/img/stonewall.png");
+	// g_map->texture->door_img = malloc(sizeof(mlx_image_t));
+	// g_map->texture->door_img = mlx_texture_to_image(g_map->mlx, g_map->texture->door);
 	if (!g_map->texture->door)
 		return (-1);
 	return (0);
