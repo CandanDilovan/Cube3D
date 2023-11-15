@@ -6,13 +6,14 @@
 #    By: aabel <aabel@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/11/14 13:25:28 by aabel            ###   ########.fr        #
+#    Updated: 2023/11/15 12:18:05 by aabel            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
+
 NAME = Cube3D
-SOURCES = src/main/main.c src/main/ft_check_up_down.c src/main/ft_draw.c \
+SOURCES = src/main/main.c src/main/ft_check_up_down.c src/main/ft_draw.c src/main/ft_texture.c \
 		src/Parsing/ft_parsing.c src/Parsing/ft_parsing_texture.c src/Parsing/ft_parsing_map.c src/Parsing/ft_return_error.c src/Parsing/ft_check_texture.c src/Parsing/ft_check_colors.c\
 		src/move_hitbox/hitbox.c src/move_hitbox/move.c src/move_hitbox/rotate.c src/move_hitbox/player_start.c src/main/init_door.c \
 			

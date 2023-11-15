@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:22:17 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/08 15:27:31 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/13 16:29:35 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,24 @@ static void	ft_dda_comp(t_map *g_map, t_walls *walls, int *is_wall, int touched)
 	}
 }
 
+static void	ft_side(t_map *g_map, t_walls *walls, int who)
+{
+	if (who == 1)
+	{
+		if (walls->sdx < 0)
+			g_map->texture->side = 'W';
+		else
+			g_map->texture->side = 'E';
+	}
+	else
+	{
+		if (walls->sdy < 0)
+			g_map->texture->side = 'S';
+		else
+			g_map->texture->side = 'N';
+	}
+}
+
 static void	ft_dda(t_map *g_map, t_walls *walls)
 {
 	int	is_wall;
@@ -36,12 +54,14 @@ static void	ft_dda(t_map *g_map, t_walls *walls)
 		{
 			walls->sdx += walls->ddx;
 			walls->mx += walls->stepx;
+			ft_side(g_map, walls, 1);
 			touched = 1;
 		}
 		else
 		{
 			walls->sdy += walls->ddy;
 			walls->my += walls->stepy;
+			ft_side(g_map, walls, 0);
 			touched = 0;
 		}
 		ft_dda_comp(g_map, walls, &is_wall, touched);

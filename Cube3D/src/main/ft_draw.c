@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:20:57 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/14 14:28:56 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 12:17:00 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	ft_draw_game(t_map *g_map, t_walls *walls, double a, int r)
 	uint32_t	dend;
 	uint32_t	y;
 
-	y = 0;
+	y = -1;
 	a = (int)(WH / walls->line);
 	dstart = (-a / 2) + (WH / 2);
 	if (dstart < 0)
@@ -55,18 +55,13 @@ static void	ft_draw_game(t_map *g_map, t_walls *walls, double a, int r)
 	dend = (a / 2) + (WH / 2);
 	if (dend >= WH)
 		dend = WH - 1;
-	while (y < WH)
-	{
+	ft_draw_walls(g_map, dstart, a);
+	while (++y < WH)
 		mlx_put_pixel(g_map->player->ray, r, y, 0);
-		y++;
-	}
-	y = 0;
-	while (y < WH)
-	{
+	y = -1;
+	while (++y < WH)
 		if (y >= dstart && y <= dend)
-			mlx_put_pixel(g_map->player->ray, r, y, 0xFFFFFFFF);
-		y++;
-	}
+			mlx_put_pixel(g_map->player->ray, r, y, ft_get_pixel(g_map));
 }
 
 void	ft_paint_ray(t_map *g_map, t_walls *walls)

@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:53:34 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/14 15:56:28 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 12:17:35 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ size_t	ft_strlen_g_map(const char *str)
 	return (a);
 }
 
-static void	ft_fill_g_map(t_map *g_map, char *map)
+static int	ft_fill_g_map(t_map *g_map, char *map)
 {
 	int			fd;
 	char		*line;
@@ -75,6 +75,7 @@ static void	ft_fill_g_map(t_map *g_map, char *map)
 	}
 	free(line);
 	close(fd);
+	return (0);
 }
 
 int	map_count(t_map *g_map, char *map)
@@ -95,11 +96,8 @@ int	map_count(t_map *g_map, char *map)
 			g_map->height++;
 		else if (ft_is_map(line, &flag) == -1 && flag == 0)
 			ft_identify_texture(g_map, line);
-		else if (ft_is_map(line, &flag) == -1 && flag == 1)
-		{
-			free(line);
-			break ;
-		}
+		else if (flag == 1 && ft_is_map(line, &flag) == -1)
+			return (ft_return_error("Unexpected char in map"), -1);
 		free(line);
 		line = get_next_line(fd);
 	}

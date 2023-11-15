@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 11:39:54 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/15 12:10:42 by aabel            ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/11/15 12:17:54 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef CUBE3D_H
 
@@ -24,6 +26,7 @@
 # define DR 0.0174533
 # define WH	720
 # define WW	1280
+# define TEX_SIZE 64
 
 # define TILE_SIZE 64
 
@@ -37,10 +40,10 @@ typedef struct s_doors
 
 typedef struct a_texture
 {
-	mlx_texture_t	*north;
-	mlx_texture_t	*south;
-	mlx_texture_t	*west;
-	mlx_texture_t	*east;
+	mlx_texture_t	**north;
+	mlx_texture_t	**south;
+	mlx_texture_t	**west;
+	mlx_texture_t	**east;
 	int				*ceilling;
 	int				*floor;
 	mlx_texture_t	*door;
@@ -88,6 +91,10 @@ typedef struct a_map
 	char		*so;
 	char		*we;
 	char		*ea;
+	char		*no2;
+	char		*so2;
+	char		*we2;
+	char		*ea2;
 	char		*f;
 	char		*c;
 	int			error;
@@ -110,9 +117,11 @@ int			ft_int_map(t_map *g_map);
 int			*ft_rgb(char *str);
 
 //texture
-int			ft_identify_texture(t_map *g_map, char *line);
+void		ft_identify_texture(t_map *g_map, char *line);
 int			ft_textures(t_map *g_map);
 uint32_t	ft_get_colors(int *rgb);
+uint32_t	ft_get_pixel(t_map *g_map);
+void		ft_draw_walls(t_map *g_map, int dstart, int line_h);
 
 //print_error
 int			ft_return_error(char *str);
