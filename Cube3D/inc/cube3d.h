@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/11/15 12:17:54 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 12:30:42 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,15 @@ typedef struct a_texture
 	mlx_texture_t	**south;
 	mlx_texture_t	**west;
 	mlx_texture_t	**east;
+	double			time;
+	int				side;
+	int				flag;
 	int				*ceilling;
 	int				*floor;
+	int				tex_y;
+	int				tex_x;
+	int				tex_pos;
+	int				tex_step;
 	mlx_texture_t	*door;
 }				t_texture;
 
