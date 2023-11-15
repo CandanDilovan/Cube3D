@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:20:57 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/15 13:38:13 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 15:15:48 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static double	ft_final_touch(t_map *g_map, t_walls *walls)
 
 static void	ft_draw_game(t_map *g_map, t_walls *walls, double a, int r)
 {
-	uint32_t	dstart;
-	uint32_t	dend;
-	uint32_t	y;
+	int	dstart;
+	int	dend;
+	int	y;
 
 	y = -1;
 	a = (int)(WH / walls->line);
@@ -56,12 +56,14 @@ static void	ft_draw_game(t_map *g_map, t_walls *walls, double a, int r)
 	if (dend >= WH)
 		dend = WH - 1;
 	ft_draw_walls(g_map, dstart, a);
-	while (++y < WH)
-		mlx_put_pixel(g_map->player->ray, r, y, 0);
 	y = -1;
 	while (++y < WH)
+	{
 		if (y >= dstart && y <= dend)
 			mlx_put_pixel(g_map->player->ray, r, y, ft_get_pixel(g_map));
+		else
+			mlx_put_pixel(g_map->player->ray, r, y, 0);
+	}
 }
 
 void	ft_paint_ray(t_map *g_map, t_walls *walls)

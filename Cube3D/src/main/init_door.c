@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:46:26 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/15 13:40:08 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 13:49:53 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,9 @@ int	player_range_door(t_map *g_map)
 
 	ydistance = g_map->player->y - g_map->doors->y;
 	xdistance = g_map->player->x - g_map->doors->x;
-	printf("ydistance = %f\n", ydistance);
-	printf("xdistance = %f\n", xdistance);
-	if (ydistance <= 2 || ydistance >= -2)
+	if (ydistance <= 2 && ydistance >= -2)
 	{
-		if (xdistance <= 2 || xdistance >= -2)
+		if (xdistance <= 2 && xdistance >= -2)
 			return (1);
 	}
 	else
