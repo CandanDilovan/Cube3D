@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/11/15 15:40:56 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 16:28:53 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,4 +165,5 @@ void		init_door(t_map *g_map);
 int			count_doors(t_map *g_map);
 t_doors		*create_door(int x, int y);
 int			player_range_door(t_map *g_map);
+void		open_door(t_map *g_map, int flag);
 #endif

@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:46:26 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/15 15:44:56 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 16:30:04 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_door(t_map *g_map)
 	i = -1;
 	y = -1;
 	g_map->doors = malloc(sizeof(t_doors *) * (count_doors(g_map)));
+	printf("Doors count : %d\n", count_doors(g_map));
 	while (++y < g_map->height)
 	{
 		x = -1;
@@ -77,4 +78,32 @@ int	player_range_door(t_map *g_map)
 	else
 		return (-1);
 	return (0);
+}
+
+void	open_door(t_map *g_map, int flag)
+{
+	int		i;
+	int		x;
+	int		y;
+
+	i = 0;
+	x = 0;
+	y = 0;
+	if (flag == 1)
+	{
+		while (++y < (int)g_map->height)
+		{
+			x = -1;
+			while (++x < (int)g_map->widht)
+				if (g_map->map[y][x] == 'D')
+					g_map->map[y][x] = '0';
+		}
+	}
+	else
+	{
+		while (g_map->doors)
+		{
+			g_map->map[g_map->doors->y][g_map->doors->x] = 'D';
+		}
+	}
 }
