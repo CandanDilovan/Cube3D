@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/11/15 15:40:56 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 16:13:26 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct a_texture
 	int				*floor;
 	int				tex_y;
 	int				tex_x;
+	int				is_door;
 	double			tex_pos;
 	double			tex_step;
 	mlx_texture_t	*door;
