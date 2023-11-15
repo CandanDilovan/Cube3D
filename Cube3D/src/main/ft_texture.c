@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_texture.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 22:42:11 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/15 14:25:39 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 16:24:39 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,20 @@ static uint32_t	ft_colors(uint32_t colors)
 
 static mlx_texture_t	*ft_tex_selector(t_map *g_map)
 {
-	if (g_map->texture->side == 'W')
-		return (g_map->texture->west[g_map->texture->flag]);
-	else if (g_map->texture->side == 'E')
-		return (g_map->texture->east[g_map->texture->flag]);
-	else if (g_map->texture->side == 'N')
-		return (g_map->texture->north[g_map->texture->flag]);
-	else if (g_map->texture->side == 'S')
-		return (g_map->texture->south[g_map->texture->flag]);
-	else if (g_map->texture->side == 'D')
+	if (g_map->texture->is_door == 1)
 		return (g_map->texture->door);
 	else
-		return (NULL);
+	{
+		if (g_map->texture->side == 'W')
+			return (g_map->texture->west[g_map->texture->flag]);
+		else if (g_map->texture->side == 'E')
+			return (g_map->texture->east[g_map->texture->flag]);
+		else if (g_map->texture->side == 'N')
+			return (g_map->texture->north[g_map->texture->flag]);
+		else if (g_map->texture->side == 'S')
+			return (g_map->texture->south[g_map->texture->flag]);
+	}
+	return (NULL);
 }
 
 uint32_t	ft_get_pixel(t_map *g_map)
@@ -77,7 +79,6 @@ uint32_t	ft_get_pixel(t_map *g_map)
 				+ g_map->texture->tex_x) * sizeof(uint32_t));
 	color = *pixel;
 	return (ft_colors(color));
-
 }
 
 void	ft_draw_walls(t_map *g_map, int dstart, int line_h)

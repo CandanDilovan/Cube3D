@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/11/15 16:28:53 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 16:36:35 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct a_texture
 	int				*floor;
 	int				tex_y;
 	int				tex_x;
+	int				is_door;
 	double			tex_pos;
 	double			tex_step;
 	mlx_texture_t	*door;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_up_down.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:22:17 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/15 13:29:29 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/15 16:26:59 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 static void	ft_dda_comp(t_map *g_map, t_walls *walls, int *is_wall, int touched)
 {
-	if (g_map->map[walls->my][walls->mx] == '1')
+	if (g_map->map[walls->my][walls->mx] == '1'
+		|| g_map->map[walls->my][walls->mx] == 'D')
 	{
 		*is_wall = 1;
 		if (touched == 0)
 			walls->line = (walls->sdy - walls->ddy);
 		else
 			walls->line = (walls->sdx - walls->ddx);
+		if (g_map->map[walls->my][walls->mx] == 'D')
+			g_map->texture->is_door = 1;
+		else
+			g_map->texture->is_door = 0;
 	}
-	else if (g_map->map[walls->my][walls->mx] == 'D')
-		g_map->texture->side = 'D';
 }
 
 static void	ft_side(t_map *g_map, t_walls *walls, int who)
