@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:46:42 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/15 16:35:22 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/17 11:46:04 by babels           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,14 @@ void	ft_move(void *param)
 	m = g_map->mlx;
 	if (mlx_is_key_down(m, MLX_KEY_ESCAPE))
 		mlx_close_window(m);
-	// if (player_range_door(g_map) == 1)
-	// {
-	// 	open_door(g_map, 1);
-	// 	printf("Door opened\n");
-	// }
-	// else if (!player_range_door(g_map))
-	// {
-	// 	open_door(g_map, 0);
-	// 	printf("Door closed\n");
-	// }
+	if (player_range_door(g_map) == 1)
+	{
+		open_door(g_map, 1);
+	}
+	else if (player_range_door(g_map) == -1)
+	{
+		open_door(g_map, 0);
+	}
 	if (g_map)
 	{
 		mouse_hook(g_map);

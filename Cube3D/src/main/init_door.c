@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_door.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:46:26 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/15 16:30:04 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/17 12:10:26 by babels           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	init_door(t_map *g_map)
 	i = -1;
 	y = -1;
 	g_map->doors = malloc(sizeof(t_doors *) * (count_doors(g_map)));
-	printf("Doors count : %d\n", count_doors(g_map));
 	while (++y < g_map->height)
 	{
 		x = -1;
@@ -68,9 +67,11 @@ int	player_range_door(t_map *g_map)
 	double	ydistance;
 	double	xdistance;
 
-	ydistance = g_map->player->y - g_map->doors->y;
-	xdistance = g_map->player->x - g_map->doors->x;
-	if (ydistance <= 2 && ydistance >= -2)
+	ydistance = g_map->doors->y - g_map->player->y;
+	xdistance = g_map->doors->x - g_map->player->x;
+	printf("ydistance = %f\n", ydistance);
+	printf("xdistance = %f\n", xdistance);
+	if (ydistance <= 2 && ydistance >= -2.5)
 	{
 		if (xdistance <= 2 && xdistance >= -2)
 			return (1);
@@ -82,28 +83,12 @@ int	player_range_door(t_map *g_map)
 
 void	open_door(t_map *g_map, int flag)
 {
-	int		i;
-	int		x;
-	int		y;
-
-	i = 0;
-	x = 0;
-	y = 0;
 	if (flag == 1)
 	{
-		while (++y < (int)g_map->height)
-		{
-			x = -1;
-			while (++x < (int)g_map->widht)
-				if (g_map->map[y][x] == 'D')
-					g_map->map[y][x] = '0';
-		}
+			g_map->map[g_map->doors->y][g_map->doors->x] = '0';
 	}
-	else
+	else if (flag == 0)
 	{
-		while (g_map->doors)
-		{
 			g_map->map[g_map->doors->y][g_map->doors->x] = 'D';
-		}
 	}
 }
