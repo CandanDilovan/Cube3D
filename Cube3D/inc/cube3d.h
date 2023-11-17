@@ -6,11 +6,9 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/11/15 16:13:26 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/17 18:34:06 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #ifndef CUBE3D_H
 
@@ -122,6 +120,7 @@ int			ft_is_cub(char *map);
 int			ft_no_void(t_map *g_map);
 int			ft_is_map(char	*line, int *flag);
 int			ft_int_map(t_map *g_map);
+void		ft_machin(t_map *g_map);
 int			*ft_rgb(char *str);
 
 //texture

@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:10:53 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/08 16:07:11 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/16 20:46:48 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static char	*ft_malloc_rgb(char *str, char *rgb, int a)
 	while (str[a])
 	{
 		b = 0;
-		while (str[a + b] >= '0' && str[a + b] <= '9' && str[a] != ',')
+		while (str[a + b] && str[a + b] >= '0'
+			&& str[a + b] <= '9' && str[a] != ',')
 			b++;
 		if (b > 0 && b < 4)
 		{
@@ -50,6 +51,10 @@ static int	*ft_int_rgb(char **rgb)
 {
 	int	*intrgb;
 
+	if (!rgb[0] || !rgb[1] || !rgb[2])
+		return (NULL);
+	if (rgb[0][0] == '\0' || rgb[1][0] == '\0' || rgb[2][0] == '\0')
+		return (NULL);
 	intrgb = malloc(sizeof(int) * 3);
 	intrgb[0] = ft_atoi(rgb[0]);
 	if (intrgb[0] > 255 || intrgb[0] < 0)
@@ -81,7 +86,7 @@ int	*ft_rgb(char *str)
 		rgb[c] = ft_malloc_rgb(str, rgb[c], a);
 		if (!rgb[c])
 			return (free_all_cub(rgb, c), NULL);
-		while (str[a + ++b] >= '0' && str[a + b] <= '9' && str[a] != ',')
+		while (str[a + ++b] >= '0' && str[a + b] <= '9' && str[a + b] != ',')
 			rgb[c][b] = str[a + b];
 		if (str[a + b] == ',' || str[a + b] == '\n')
 			a++;
