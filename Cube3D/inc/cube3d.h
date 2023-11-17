@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/11/17 20:53:16 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/17 21:16:25 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int			ft_is_cub(char *map);
 int			ft_no_void(t_map *g_map);
 int			ft_is_map(char	*line, int *flag);
 int			ft_int_map(t_map *g_map);
-void		ft_machin(t_map *g_map);
+int			ft_machin(t_map *g_map);
 int			*ft_rgb(char *str);
 
 //texture

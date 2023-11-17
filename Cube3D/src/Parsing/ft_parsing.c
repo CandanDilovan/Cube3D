@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:46:09 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/17 19:49:36 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/17 21:23:22 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ static int	ft_check_holes(t_map *g_map, uint32_t y, uint32_t x)
 {
 	if (g_map->int_map[y][x] && g_map->int_map[y][x] > 1)
 	{
+		if (x == 0 || y == 0 || y == g_map->height
+			|| x == (uint32_t)ft_strlen(g_map->map[y]))
+			return (-1);
 		if (ft_hole_in_one(g_map->int_map, y + 1, x) == -1)
 			return (-1);
 		if (ft_hole_in_one(g_map->int_map, y - 1, x) == -1)

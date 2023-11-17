@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:46:42 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/17 20:54:08 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/17 21:21:00 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	ft_check_doors(t_map *g_map)
 		}
 		a++;
 	}
-	ft_printf("%d\n", a);
 }
 
 void	ft_move(void *param)

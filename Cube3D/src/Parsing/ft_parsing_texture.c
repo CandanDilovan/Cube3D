@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 06:56:57 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/17 19:55:44 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/17 21:22:51 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	ft_int_map(t_map *g_map)
 {
 	uint32_t	x;
 	uint32_t	y;
-	int a;
-	int b;
 
 	g_map->int_map = malloc(sizeof(int *) * (g_map->height + 1));
 	if (!g_map->int_map)
@@ -46,20 +44,8 @@ int	ft_int_map(t_map *g_map)
 		while (ft_strlen(g_map->map[y]) > ++x)
 			ft_fill_intmap(g_map, y, x);
 	}
-	a = -1;
-	while ((int)g_map->height > ++a)
-	{
-		b = -1;
-		while ((int)ft_strlen(g_map->map[a]) > ++b)
-		{
-			if (g_map->int_map[a][b] > 1)
-				ft_printf("%d", 2);
-			else 
-				ft_printf("%d", g_map->int_map[a][b]);
-		}
-		ft_printf("\n");
-	}
-	ft_machin(g_map);
+	if (ft_machin(g_map) == -1)
+		return (-1);
 	return (0);
 }
 
