@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/11/17 20:08:20 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/17 20:53:16 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct a_player
 	double		dirx;
 	double		diry;
 	double		pa;
+	int			doors_nb;
 	mlx_image_t	*ray;
 }				t_player;
 
@@ -110,7 +111,7 @@ typedef struct a_map
 	mlx_image_t	*img;
 	t_player	*player;
 	t_walls		*walls;
-	t_doors		*doors;
+	t_doors		**doors;
 }				t_map;
 
 //map
@@ -164,6 +165,6 @@ void		find_spawn(char **map, int *x, int *y);
 void		init_door(t_map *g_map);
 int			count_doors(t_map *g_map);
 t_doors		*create_door(int x, int y);
-int			player_range_door(t_map *g_map);
-void		open_door(t_map *g_map, int flag);
+int			player_range_door(t_map *g_map, t_doors *door);
+void		open_door(t_map *g_map, t_doors *door, int flag);
 #endif

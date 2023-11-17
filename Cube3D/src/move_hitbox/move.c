@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:46:42 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/17 11:46:04 by babels           ###   ########.fr       */
+/*   Updated: 2023/11/17 20:54:08 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+void	ft_check_doors(t_map *g_map)
+{
+	int	a;
+
+	a = 0;
+	while (a < g_map->player->doors_nb)
+	{
+		if (player_range_door(g_map, g_map->doors[a]) == 1)
+		{
+			open_door(g_map, g_map->doors[a], 1);
+		}
+		else if (player_range_door(g_map, g_map->doors[a]) == -1)
+		{
+			open_door(g_map, g_map->doors[a], 0);
+		}
+		a++;
+	}
+	ft_printf("%d\n", a);
+}
 
 void	ft_move(void *param)
 {
@@ -21,14 +41,6 @@ void	ft_move(void *param)
 	m = g_map->mlx;
 	if (mlx_is_key_down(m, MLX_KEY_ESCAPE))
 		mlx_close_window(m);
-	if (player_range_door(g_map) == 1)
-	{
-		open_door(g_map, 1);
-	}
-	else if (player_range_door(g_map) == -1)
-	{
-		open_door(g_map, 0);
-	}
 	if (g_map)
 	{
 		mouse_hook(g_map);
@@ -45,6 +57,7 @@ void	ft_move(void *param)
 		if (mlx_is_key_down(m, MLX_KEY_RIGHT))
 			rotate_right(g_map, 0);
 	}
+	ft_check_doors(g_map);
 	ft_paint_ray(g_map, g_map->walls);
 }
 
