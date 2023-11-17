@@ -6,7 +6,7 @@
 /*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/11/17 18:34:06 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/17 20:08:20 by dilovancand      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,4 +165,5 @@ void		init_door(t_map *g_map);
 int			count_doors(t_map *g_map);
 t_doors		*create_door(int x, int y);
 int			player_range_door(t_map *g_map);
+void		open_door(t_map *g_map, int flag);
 #endif

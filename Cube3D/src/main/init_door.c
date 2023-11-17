@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_door.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:46:26 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/15 15:44:56 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/17 12:10:26 by babels           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,11 @@ int	player_range_door(t_map *g_map)
 	double	ydistance;
 	double	xdistance;
 
-	ydistance = g_map->player->y - g_map->doors->y;
-	xdistance = g_map->player->x - g_map->doors->x;
-	if (ydistance <= 2 && ydistance >= -2)
+	ydistance = g_map->doors->y - g_map->player->y;
+	xdistance = g_map->doors->x - g_map->player->x;
+	printf("ydistance = %f\n", ydistance);
+	printf("xdistance = %f\n", xdistance);
+	if (ydistance <= 2 && ydistance >= -2.5)
 	{
 		if (xdistance <= 2 && xdistance >= -2)
 			return (1);
@@ -77,4 +79,16 @@ int	player_range_door(t_map *g_map)
 	else
 		return (-1);
 	return (0);
+}
+
+void	open_door(t_map *g_map, int flag)
+{
+	if (flag == 1)
+	{
+			g_map->map[g_map->doors->y][g_map->doors->x] = '0';
+	}
+	else if (flag == 0)
+	{
+			g_map->map[g_map->doors->y][g_map->doors->x] = 'D';
+	}
 }
