@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:44:11 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/24 12:45:37 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/24 17:20:12 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,27 @@ static int	ft_load_texture(t_map *g_map)
 {
 	g_map->texture->north = mlx_load_png(g_map->no);
 	if (!g_map->texture->north)
-		return (-1);
+		return (free(g_map->texture), ft_free_intmap(g_map), -1);
 	g_map->texture->south = mlx_load_png(g_map->so);
 	if (!g_map->texture->south)
-		return (-1);
+		return (mlx_delete_texture(g_map->texture->north),
+			free(g_map->texture), ft_free_intmap(g_map), -1);
 	g_map->texture->east = mlx_load_png(g_map->ea);
 	if (!g_map->texture->east)
-		return (-1);
+		return (mlx_delete_texture(g_map->texture->north),
+			mlx_delete_texture(g_map->texture->south),
+			free(g_map->texture), ft_free_intmap(g_map), -1);
 	g_map->texture->west = mlx_load_png(g_map->we);
 	if (!g_map->texture->west)
-		return (-1);
+		return (mlx_delete_texture(g_map->texture->north),
+			mlx_delete_texture(g_map->texture->south),
+			mlx_delete_texture(g_map->texture->east),
+			free(g_map->texture), ft_free_intmap(g_map), -1);
 	g_map->texture->door = malloc(sizeof(mlx_texture_t *) * 2);
-	g_map->texture->door[0] = mlx_load_png("src/img/stonewall.png");
-	g_map->texture->door[1] = mlx_load_png("src/img/Blue64.png");
 	if (!g_map->texture->door)
 		return (-1);
+	g_map->texture->door[0] = mlx_load_png("src/img/stonewall.png");
+	g_map->texture->door[1] = mlx_load_png("src/img/Blue64.png");
 	return (0);
 }
 

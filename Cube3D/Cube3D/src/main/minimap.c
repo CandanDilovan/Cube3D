@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 12:24:34 by babels            #+#    #+#             */
-/*   Updated: 2023/11/21 14:12:58 by babels           ###   ########.fr       */
+/*   Updated: 2023/11/24 17:42:06 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_image	*setup_image(t_map *g_map)
 	images->map_player = create_img_full(TSMAP, g_map->mlx, 0xFF6600FF);
 	images->map_wall = create_img_full(TSMAP, g_map->mlx, 0x808080FF);
 	images->map_floor = create_img_full(TSMAP, g_map->mlx, 0xC8AD7FFF);
-	images->map_void = create_img_cf(TSMAP, TSMAP, g_map->mlx, 0x808080FF);
+	images->map_void = create_img_cf(TSMAP, TSMAP, g_map->mlx, 0x66000000);
 	return (images);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 06:56:57 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/24 12:49:17 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/24 13:24:30 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,15 @@ static char	*ft_texture_path(char *line, int a)
 	return (str);
 }
 
-int	ft_identify_texture(t_map *g_map, char *line, int *flag)
+void	ft_identify_texture(t_map *g_map, char *line, int *flag)
 {
 	int	a;
 
 	a = 0;
 	while (line[a] && (line[a] == ' ' || line[a] == '\t'))
 		a++;
+	if (line[a] >= 33 && line[a] <= 126)
+		*flag += 1;
 	if (line[a] == 'N' && line[a + 1] == 'O')
 		g_map->no = ft_texture_path(line, (a + 2));
 	else if (line[a] == 'W' && line[a + 1] == 'E')

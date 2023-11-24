@@ -6,38 +6,63 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 14:27:58 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/24 12:45:58 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/24 17:00:45 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
+static void	ft_fill2(t_map *g_map, uint32_t *x, int *a)
+{
+	if (!g_map->map[x[0]][x[1] + 1])
+		;
+	else
+	{
+		if (g_map->map[x[0]][x[1] + 1] != '1'
+			&& g_map->int_map[x[0]][x[1] + 1] == 0)
+		{
+			g_map->int_map[x[0]][x[1] + 1] = g_map->int_map[x[0]][x[1]] + 1;
+			*a = *a + 1;
+		}
+	}
+	if (!g_map->map[x[0]][x[1] - 1])
+		;
+	else
+	{
+		if (g_map->map[x[0]][x[1] - 1] != '1'
+			&& g_map->int_map[x[0]][x[1] - 1] == 0)
+		{
+			g_map->int_map[x[0]][x[1] - 1] = g_map->int_map[x[0]][x[1]] + 1;
+			*a = *a + 1;
+		}
+	}
+}
+
 static void	ft_fill(t_map *g_map, uint32_t *x, int *a)
 {
-	if (g_map->map[x[0] + 1][x[1]] != '1'
-		&& g_map->int_map[x[0] + 1][x[1]] == 0)
+	if (!g_map->map[x[0] + 1][x[1]])
+		;
+	else
 	{
-		g_map->int_map[x[0] + 1][x[1]] = g_map->int_map[x[0]][x[1]] + 1;
-		*a = *a + 1;
+		if (g_map->map[x[0] + 1][x[1]] != '1'
+			&& g_map->int_map[x[0] + 1][x[1]] == 0)
+		{
+			g_map->int_map[x[0] + 1][x[1]] = g_map->int_map[x[0]][x[1]] + 1;
+			*a = *a + 1;
+		}
 	}
-	if (g_map->map[x[0] - 1][x[1]] != '1'
-		&& g_map->int_map[x[0] - 1][x[1]] == 0)
+	if (!g_map->map[x[0] - 1][x[1]])
+		;
+	else
 	{
-		g_map->int_map[x[0] - 1][x[1]] = g_map->int_map[x[0]][x[1]] + 1;
-		*a = *a + 1;
+		if (g_map->map[x[0] - 1][x[1]] != '1'
+			&& g_map->int_map[x[0] - 1][x[1]] == 0)
+		{
+			g_map->int_map[x[0] - 1][x[1]] = g_map->int_map[x[0]][x[1]] + 1;
+			*a = *a + 1;
+		}
 	}
-	if (g_map->map[x[0]][x[1] + 1] != '1'
-		&& g_map->int_map[x[0]][x[1] + 1] == 0)
-	{
-		g_map->int_map[x[0]][x[1] + 1] = g_map->int_map[x[0]][x[1]] + 1;
-		*a = *a + 1;
-	}
-	if (g_map->map[x[0]][x[1] - 1] != '1'
-		&& g_map->int_map[x[0]][x[1] - 1] == 0)
-	{
-		g_map->int_map[x[0]][x[1] - 1] = g_map->int_map[x[0]][x[1]] + 1;
-		*a = *a + 1;
-	}
+	ft_fill2(g_map, x, a);
 }
 
 static int	ft_space(t_map *g_map, uint32_t *x, int *a, int i)
@@ -52,6 +77,7 @@ static int	ft_space(t_map *g_map, uint32_t *x, int *a, int i)
 				if (g_map->map[x[0]][x[1]] != '1' && (x[1] == 0 || x[0] == 0
 					|| x[0] == g_map->height
 					|| x[1] == (uint32_t)ft_strlen(g_map->map[x[0]])))
+					return (-1);
 				ft_fill(g_map, x, a);
 			}
 		}

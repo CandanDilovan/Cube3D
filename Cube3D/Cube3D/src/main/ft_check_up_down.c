@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_up_down.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:22:17 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/15 16:26:59 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/24 14:21:17 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ static void	ft_side(t_map *g_map, t_walls *walls, int who)
 {
 	if (who == 1)
 	{
-		if (walls->sdx < 0)
+		if (walls->anglex < 0)
 			g_map->texture->side = 'W';
 		else
 			g_map->texture->side = 'E';
 	}
 	else
 	{
-		if (walls->sdy < 0)
+		if (walls->angley < 0)
 			g_map->texture->side = 'S';
 		else
 			g_map->texture->side = 'N';

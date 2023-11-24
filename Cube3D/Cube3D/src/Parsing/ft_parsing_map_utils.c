@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:36:50 by dcandan           #+#    #+#             */
-/*   Updated: 2023/11/24 12:48:02 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/24 18:49:07 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,13 @@ static int	ft_read_cub(t_map *g_map, int fd)
 			g_map->height++;
 		else if (ft_is_map(line, &flag) == -1 && flag == 0)
 			ft_identify_texture(g_map, line, &a);
-		else if (flag == 1 && ft_is_map(line, &flag) == -1)
-			return (ft_return_error("Unexpected char in map"), -1);
 		free(line);
 		line = get_next_line(fd);
 	}
 	free(line);
+	if (a != 6)
+		return (ft_return_error
+			("Error : There needs to be 2 colors and 4 textures"), -1);
 	return (0);
 }
 
@@ -76,5 +77,6 @@ int	map_count(t_map *g_map, char *map)
 	g_map->widht = 0;
 	if (ft_read_cub(g_map, fd) == -1)
 		return ((void)close(fd), -1);
+	//check map et free si il est faux;
 	return ((void)close(fd), ft_fill_g_map(g_map, map), 0);
 }

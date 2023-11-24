@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babels <babels@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:46:42 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/21 14:41:04 by babels           ###   ########.fr       */
+/*   Updated: 2023/11/24 16:23:20 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	ft_move(void *param)
 
 	g_map = (t_map *)param;
 	m = g_map->mlx;
-	// g_map->image = setup_image(g_map);
 	if (mlx_is_key_down(m, MLX_KEY_ESCAPE))
 		mlx_close_window(m);
 	if (g_map)
@@ -58,8 +57,7 @@ void	ft_move(void *param)
 			rotate_right(g_map, 0);
 	}
 	ft_check_doors(g_map);
-	ft_paint_ray(g_map, g_map->walls);
-	ft_minimap(g_map);
+	(ft_paint_ray(g_map, g_map->walls), ft_minimap(g_map));
 }
 
 void	go_front(t_map *g_map)

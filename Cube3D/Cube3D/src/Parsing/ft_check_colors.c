@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_colors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:10:53 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/16 20:46:48 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/24 17:53:03 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ static int	*ft_int_rgb(char **rgb)
 {
 	int	*intrgb;
 
-	if (!rgb[0] || !rgb[1] || !rgb[2])
+	if (!rgb[0] || rgb[0][0] == '\0')
 		return (NULL);
-	if (rgb[0][0] == '\0' || rgb[1][0] == '\0' || rgb[2][0] == '\0')
-		return (NULL);
+	if (!rgb[1] || rgb[1][0] == '\0')
+		return (free_all_cub(rgb, 1), NULL);
+	if (!rgb[2] || rgb[2][0] == '\0')
+		return (free_all_cub(rgb, 2), NULL);
 	intrgb = malloc(sizeof(int) * 3);
 	intrgb[0] = ft_atoi(rgb[0]);
 	if (intrgb[0] > 255 || intrgb[0] < 0)

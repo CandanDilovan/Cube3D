@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/11/24 12:46:27 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/24 18:13:48 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ static int	ft_parsing_verif2(t_map *g_map, char *argv)
 	if (!g_map->player)
 		return (free(g_map), -1);
 	g_map->walls = malloc(sizeof(t_walls));
-	if (!g_map->player)
-		return (free(g_map), free(g_map->player), -1);
+	if (!g_map->walls)
+		return (free(g_map->player), free(g_map), -1);
 	if (map_count(g_map, argv) == -1)
-		return (-1);
+		return (ft_free_maperror(g_map), -1);
 	if (ft_int_map(g_map) == -1)
 		return (free(g_map), -1);
 	if (ft_no_void(g_map) == -1)
@@ -97,11 +97,15 @@ static int	init_map(t_map *g_map)
 	if (!g_map->c || !g_map->f)
 		return (ft_return_error("Something's wrong with colors"), -1);
 	g_map->texture->ceilling = ft_rgb(g_map->c);
+	if (!g_map->texture->ceilling)
+		return (ft_free_text(g_map),
+			ft_return_error("Something's wrong with colors"), -1);
 	g_map->texture->floor = ft_rgb(g_map->f);
+	if (!g_map->texture->floor)
+		return (free(g_map->texture->ceilling), ft_free_text(g_map),
+			ft_return_error("Something's wrong with colors"), -1);
 	g_map->mouse = 0;
 	g_map->mouse_moved = 0;
-	if (!g_map->texture->ceilling || !g_map->texture->floor)
-		return (ft_return_error("Something's wrong with colors"), -1);
 	return (0);
 }
 
@@ -110,6 +114,7 @@ int	main(int argc, char **argv)
 	t_map	*g_map;
 
 	g_map = ft_parsing_verif(argc, argv);
+	system("leaks Cub3D");
 	if (!g_map)
 		return (-1);
 	init_player(g_map);
