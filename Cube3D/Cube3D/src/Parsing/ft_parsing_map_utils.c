@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing_map_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:36:50 by dcandan           #+#    #+#             */
-/*   Updated: 2023/11/24 12:48:02 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:09:43 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ static int	ft_read_cub(t_map *g_map, int fd)
 {
 	char	*line;
 	int		flag;
-	int		a;
 
-	a = 0;
 	line = get_next_line(fd);
 	if (!line)
 		return (ft_return_error("Error : .cub might be empty"));
@@ -55,7 +53,7 @@ static int	ft_read_cub(t_map *g_map, int fd)
 		if (ft_is_map(line, &flag) == 0)
 			g_map->height++;
 		else if (ft_is_map(line, &flag) == -1 && flag == 0)
-			ft_identify_texture(g_map, line, &a);
+			ft_identify_texture(g_map, line);
 		else if (flag == 1 && ft_is_map(line, &flag) == -1)
 			return (ft_return_error("Unexpected char in map"), -1);
 		free(line);

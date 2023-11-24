@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/11/24 12:48:48 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/24 15:09:39 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ int			ft_machin(t_map *g_map);
 int			*ft_rgb(char *str);
 
 //texture
-int			ft_identify_texture(t_map *g_map, char *line, int *flag);
+void		ft_identify_texture(t_map *g_map, char *line);
 int			ft_textures(t_map *g_map);
 uint32_t	ft_get_colors(int *rgb);
 uint32_t	ft_get_pixel(t_map *g_map);

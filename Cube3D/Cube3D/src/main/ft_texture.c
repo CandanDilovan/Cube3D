@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_texture.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dilovancandan <dilovancandan@student.42    +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 22:42:11 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/15 16:24:39 by dilovancand      ###   ########.fr       */
+/*   Updated: 2023/11/24 15:45:00 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-static int	ft_time(void)
+static double	ft_time(void)
 {
 	double	time;
 
 	time = mlx_get_time();
-	time = floor(time);
 	return (time);
 }
 
@@ -25,11 +24,11 @@ static void	ft_change(t_map *g_map)
 {
 	if (g_map->texture->time < ft_time())
 	{
-		g_map->texture->time = ft_time() + 0.5;
-		if (g_map->texture->flag == 1)
+		g_map->texture->time = ft_time() + 0.1;
+		if (g_map->texture->flag != 4)
+			g_map->texture->flag++;
+		else if (g_map->texture->flag == 4)
 			g_map->texture->flag = 0;
-		else if (g_map->texture->flag == 0)
-			g_map->texture->flag = 1;
 	}
 }
 
