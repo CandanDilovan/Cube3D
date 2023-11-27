@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 16:29:03 by dcandan           #+#    #+#             */
-/*   Updated: 2022/11/03 13:23:07 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:31:27 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	{
 		while (a < len)
 		{
-		((char *)dst)[a] = ((char *)src)[a];
-		a++;
+			((char *)dst)[a] = ((char *)src)[a];
+			a++;
 		}
 	}
 	return (dst);

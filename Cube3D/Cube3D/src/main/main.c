@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/11/27 13:53:06 by dcandan          ###   ########.fr       */
+/*   Created: 2023/11/27 14:09:02 by aabel             #+#    #+#             */
+/*   Updated: 2023/11/27 14:11:38 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,21 +75,6 @@ static t_map	*ft_parsing_verif(int argc, char **argv)
 			return (NULL);
 	}
 	return (g_map);
-}
-
-void	init_player(t_map *g_map)
-{
-	int	y;
-	int	x;
-
-	find_spawn(g_map->map, &y, &x);
-	g_map->player->x = x + 0.5;
-	g_map->player->y = y + 0.5;
-	setup_start_dir(g_map, g_map->map[y][x]);
-	g_map->player->dirx = cos(g_map->player->pa);
-	g_map->player->diry = sin(g_map->player->pa);
-	g_map->texture->time = 2.0;
-	g_map->texture->flag = 0;
 }
 
 static int	init_map(t_map *g_map)

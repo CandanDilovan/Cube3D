@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 22:42:11 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/24 15:45:00 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/27 14:17:04 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,19 @@ static void	ft_change(t_map *g_map)
 	}
 }
 
-static uint32_t	ft_colors(uint32_t colors)
-{
-	uint8_t	a;
-	uint8_t	r;
-	uint8_t	g;
-	uint8_t	b;
+// uint32_t	ft_colors(uint32_t colors)
+// {
+// 	uint8_t	a;
+// 	uint8_t	r;
+// 	uint8_t	g;
+// 	uint8_t	b;
 
-	a = colors >> 24;
-	r = colors >> 16;
-	g = colors >> 8;
-	b = colors;
-	return (r << 8 | g << 16 | b << 24 | a << 0);
-}
+// 	a = colors >> 24;
+// 	r = colors >> 16;
+// 	g = colors >> 8;
+// 	b = colors;
+// 	return (r << 8 | g << 16 | b << 24 | a << 0);
+// }
 
 static mlx_texture_t	*ft_tex_selector(t_map *g_map)
 {

@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:46:42 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/24 16:23:20 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:28:27 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void	ft_check_doors(t_map *g_map)
-{
-	int	a;
+// void	ft_check_doors(t_map *g_map)
+// {
+// 	int	a;
 
-	a = 0;
-	while (a < g_map->player->doors_nb)
-	{
-		if (player_range_door(g_map, &g_map->doors[a]) == 1)
-		{
-			open_door(g_map, &g_map->doors[a], 1);
-		}
-		else if (player_range_door(g_map, &g_map->doors[a]) == -1)
-		{
-			open_door(g_map, &g_map->doors[a], 0);
-		}
-		a++;
-	}
-}
+// 	a = 0;
+// 	while (a < g_map->player->doors_nb)
+// 	{
+// 		if (player_range_door(g_map, &g_map->doors[a]) == 1)
+// 		{
+// 			open_door(g_map, &g_map->doors[a], 1);
+// 		}
+// 		else if (player_range_door(g_map, &g_map->doors[a]) == -1)
+// 		{
+// 			open_door(g_map, &g_map->doors[a], 0);
+// 		}
+// 		a++;
+// 	}
+// }
 
 void	ft_move(void *param)
 {
