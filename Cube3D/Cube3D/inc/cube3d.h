@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 14:29:20 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/27 14:30:03 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/27 14:39:24 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ t_doors		create_door(int x, int y);
 int			player_range_door(t_map *g_map, t_doors *door);
 void		open_door(t_map *g_map, t_doors *door, int flag);
 void		ft_load_images(t_map *g_map);
+void		ft_check_doors(t_map *g_map);
 
 //minimap
 void		ft_minimap(t_map *g_map);
