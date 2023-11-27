@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:20:16 by dcandan           #+#    #+#             */
-/*   Updated: 2023/11/27 14:32:57 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:41:05 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ void	ft_endgame(t_map *g_map)
 
 void	ft_free_maperror(t_map *g_map)
 {
-	int	a;
-
 	if (g_map->c)
 		free(g_map->c);
 	if (g_map->f)
@@ -70,13 +68,6 @@ void	ft_free_maperror(t_map *g_map)
 		free(g_map->so);
 	if (g_map->we)
 		free(g_map->we);
-	a = -1;
-	if (g_map->map)
-	{
-		while (++a < (int)g_map->height)
-			free(g_map->map[a]);
-		free(g_map->map);
-	}
 	free(g_map->player);
 	free(g_map->walls);
 	free(g_map);
@@ -90,7 +81,7 @@ void	ft_free_intmap(t_map *g_map)
 	while (++a < (int)g_map->height)
 		free(g_map->int_map[a]);
 	free(g_map->int_map);
-	ft_free_maperror(g_map);
+	ft_free_maps(g_map);
 }
 
 void	ft_free_text(t_map *g_map)

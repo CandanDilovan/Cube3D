@@ -5,15 +5,13 @@
 #                                                     +:+ +:+         +:+      #
 #    By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/11/27 14:35:32 by dcandan          ###   ########.fr        #
+#    Created: 2023/11/27 14:36:25 by dcandan           #+#    #+#              #
+#    Updated: 2023/11/27 14:39:26 by dcandan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
-
 NAME = cub3D
-SOURCES = src/main/main.c src/main/ft_check_up_down.c src/main/ft_draw.c src/main/ft_texture.c src/Parsing/ft_impossible.c src/main/ft_free_all.c \
+SOURCES = src/main/main.c src/main/ft_check_up_down.c src/main/ft_draw.c src/main/ft_texture.c src/Parsing/ft_impossible.c src/main/ft_free_all.c src/main/ft_free_all_utils.c \
 		src/Parsing/ft_parsing.c src/Parsing/ft_parsing_texture.c src/Parsing/ft_parsing_map.c src/Parsing/ft_parsing_map_utils.c src/Parsing/ft_return_error.c src/Parsing/ft_check_texture.c src/Parsing/ft_check_colors.c\
 		src/move_hitbox/hitbox.c src/move_hitbox/move.c src/move_hitbox/rotate.c src/move_hitbox/player_start.c src/main/init_door.c src/main/minimap.c src/main/minimap_utils.c src/main/gt_utils.c \
 			

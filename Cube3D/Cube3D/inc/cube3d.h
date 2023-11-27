@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 14:29:20 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/27 14:35:26 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:40:16 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,5 +200,6 @@ void		ft_endgame(t_map *g_map);
 void		ft_free_maperror(t_map *g_map);
 void		ft_free_intmap(t_map *g_map);
 void		ft_free_text(t_map *g_map);
+void		ft_free_maps(t_map *g_map);
 
 #endif
