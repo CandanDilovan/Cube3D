@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:20:16 by dcandan           #+#    #+#             */
-/*   Updated: 2023/11/27 13:47:43 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:32:57 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,12 @@ void	ft_free_maperror(t_map *g_map)
 	if (g_map->we)
 		free(g_map->we);
 	a = -1;
-	while (++a < (int)g_map->height)
-		free(g_map->map[a]);
-	free(g_map->map);
+	if (g_map->map)
+	{
+		while (++a < (int)g_map->height)
+			free(g_map->map[a]);
+		free(g_map->map);
+	}
 	free(g_map->player);
 	free(g_map->walls);
 	free(g_map);

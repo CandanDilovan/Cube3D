@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/11/27 13:53:06 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:33:05 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ int	main(int argc, char **argv)
 	t_map	*g_map;
 
 	g_map = ft_parsing_verif(argc, argv);
-	system("leaks Cub3D");
 	if (!g_map)
 		return (-1);
 	init_player(g_map);
