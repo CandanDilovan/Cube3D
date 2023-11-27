@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:36:50 by dcandan           #+#    #+#             */
-/*   Updated: 2023/11/24 18:55:15 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/27 13:44:44 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ static int	ft_fill_g_map(t_map *g_map, char *map)
 	line = get_next_line(fd);
 	while (line && a != g_map->height)
 	{
-		if (g_map->widht < ft_strlen_g_map(line) && ft_is_map(line, &flag) == 0)
+		ft_is_map(line, &flag);
+		if (g_map->widht < ft_strlen_g_map(line) && flag == 1)
 			g_map->widht = ft_strlen_g_map(line);
-		if (flag == 1 && ft_is_map(line, &flag) == 0)
+		if (flag == 1)
 			g_map->map[a++] = ft_strdup(line);
 		free(line);
 		line = get_next_line(fd);
@@ -52,7 +53,8 @@ static int	ft_read_cub(t_map *g_map, int fd)
 	flag = 0;
 	while (line)
 	{
-		if (ft_is_map(line, &flag) == 0)
+		ft_is_map(line, &flag);
+		if (flag == 1)
 			g_map->height++;
 		else if (ft_is_map(line, &flag) == -1 && flag == 0)
 			ft_identify_texture(g_map, line, &a);
@@ -69,7 +71,10 @@ static int	ft_read_cub(t_map *g_map, int fd)
 int	map_count(t_map *g_map, char *map)
 {
 	int		fd;
+	int		a;
+	int		flag;
 
+	flag = 0;
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
 		return (ft_return_error("Error : Fd failed"), -1);
@@ -77,6 +82,13 @@ int	map_count(t_map *g_map, char *map)
 	g_map->widht = 0;
 	if (ft_read_cub(g_map, fd) == -1)
 		return ((void)close(fd), -1);
-	//check map et free si il est faux;
-	return ((void)close(fd), ft_fill_g_map(g_map, map), 0);
+	ft_fill_g_map(g_map, map);
+	a = -1;
+	while (g_map->map[++a])
+	{
+		ft_printf("%s", g_map->map[a]);
+		if (ft_is_map(g_map->map[a], &flag) == -1)
+			return (ft_return_error("Error : unexpected char in map"), -1);
+	}
+	return ((void)close(fd), 0);
 }
