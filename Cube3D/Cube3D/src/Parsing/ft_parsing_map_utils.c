@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:36:50 by dcandan           #+#    #+#             */
-/*   Updated: 2023/11/27 13:44:44 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:49:05 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ static int	ft_read_cub(t_map *g_map, int fd)
 	free(line);
 	if (a != 6)
 		return (ft_return_error
-			("Error : There needs to be 2 colors and 4 textures"), -1);
+			("Error : There needs to be 2 colors and 4 textures"),
+			ft_free_maperror(g_map), -1);
 	return (0);
 }
 
@@ -77,7 +78,8 @@ int	map_count(t_map *g_map, char *map)
 	flag = 0;
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
-		return (ft_return_error("Error : Fd failed"), -1);
+		return (ft_return_error("Error : Fd failed"),
+			free(g_map->walls), free(g_map->player), free(g_map), -1);
 	g_map->height = 0;
 	g_map->widht = 0;
 	if (ft_read_cub(g_map, fd) == -1)
@@ -88,7 +90,8 @@ int	map_count(t_map *g_map, char *map)
 	{
 		ft_printf("%s", g_map->map[a]);
 		if (ft_is_map(g_map->map[a], &flag) == -1)
-			return (ft_return_error("Error : unexpected char in map"), -1);
+			return (ft_return_error("Error : unexpected char in map"),
+				ft_free_maps(g_map), -1);
 	}
 	return ((void)close(fd), 0);
 }
