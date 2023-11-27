@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 12:28:58 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/09 13:40:32 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/27 13:39:23 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	mouse_hook(t_map *g_map)
 	mouse_on_off(g_map);
 	if (g_map->mouse == 1)
 	{
-		if (old_x > WW / 2)
+		if (old_x > (WW / 2) + 20)
 		{
 			rotate_right(g_map, ((double)old_x - (WW / 2)));
 			g_map->mouse_moved = 1;
 		}
-		if (old_x < WW / 2)
+		if (old_x < (WW / 2) - 20)
 		{
 			rotate_left(g_map, ((double)old_x - (WW / 2)));
 			g_map->mouse_moved = 1;
@@ -54,7 +54,7 @@ void	mouse_on_off(t_map *g_map)
 void	rotate_left(t_map *g_map, double rotspeed)
 {
 	g_map->player->pa -= 0.025;
-	rotspeed = rotspeed / 30;
+	rotspeed = rotspeed / 20;
 	if (g_map->player->pa < 0 && rotspeed <= 0)
 		g_map->player->pa += 2 * PI;
 	if (g_map->player->pa < 0 && rotspeed > 0)
@@ -66,7 +66,7 @@ void	rotate_left(t_map *g_map, double rotspeed)
 void	rotate_right(t_map *g_map, double rotspeed)
 {
 	g_map->player->pa += 0.025;
-	rotspeed = rotspeed / 30;
+	rotspeed = rotspeed / 20;
 	if (g_map->player->pa > 2 * PI && rotspeed <= 0)
 		g_map->player->pa -= 2 * PI;
 	if (g_map->player->pa > 2 * PI && rotspeed > 0)
