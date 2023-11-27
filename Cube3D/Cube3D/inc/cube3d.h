@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/11/27 14:05:31 by dcandan          ###   ########.fr       */
+/*   Created: 2023/11/27 14:29:20 by aabel             #+#    #+#             */
+/*   Updated: 2023/11/27 14:35:26 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ int			ft_return_error(char *str);
 int			ft_check_walls_ud(t_map *g_map, double ra);
 void		ft_lowest(t_map *g_map);
 void		ft_paint_ray(t_map *g_map, t_walls *walls);
+uint32_t	ft_colors(uint32_t colors);
 
 //move_hitbox
 void		ft_move(void *param);
@@ -180,6 +181,7 @@ int			count_doors(t_map *g_map);
 t_doors		create_door(int x, int y);
 int			player_range_door(t_map *g_map, t_doors *door);
 void		open_door(t_map *g_map, t_doors *door, int flag);
+void		ft_load_images(t_map *g_map);
 
 //minimap
 void		ft_minimap(t_map *g_map);

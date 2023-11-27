@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:20:57 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/15 15:15:48 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/27 14:11:31 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,19 @@ void	ft_paint_ray(t_map *g_map, t_walls *walls)
 		ft_draw_game(g_map, g_map->walls, a, r);
 		ra += DR / 20;
 	}
+}
+
+void	init_player(t_map *g_map)
+{
+	int	y;
+	int	x;
+
+	find_spawn(g_map->map, &y, &x);
+	g_map->player->x = x + 0.5;
+	g_map->player->y = y + 0.5;
+	setup_start_dir(g_map, g_map->map[y][x]);
+	g_map->player->dirx = cos(g_map->player->pa);
+	g_map->player->diry = sin(g_map->player->pa);
+	g_map->texture->time = 2.0;
+	g_map->texture->flag = 0;
 }

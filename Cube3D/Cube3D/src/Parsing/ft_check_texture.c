@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_texture.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:44:11 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/24 18:53:57 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:24:50 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,7 @@ static int	ft_load_texture(t_map *g_map)
 	g_map->texture->door = malloc(sizeof(mlx_texture_t *) * 5);
 	if (!g_map->texture->door)
 		return (-1);
-	g_map->texture->door[0] = mlx_load_png("src/img/door00.png");
-	g_map->texture->door[1] = mlx_load_png("src/img/door01.png");
-	g_map->texture->door[2] = mlx_load_png("src/img/door02.png");
-	g_map->texture->door[3] = mlx_load_png("src/img/door03.png");
-	g_map->texture->door[4] = mlx_load_png("src/img/door04.png");
+	ft_load_images(g_map);
 	return (0);
 }
 
