@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 06:56:57 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/24 18:52:42 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/27 17:22:54 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	ft_identify_texture(t_map *g_map, char *line, int *flag)
 {
 	int	a;
 
+	//regler ici
 	a = 0;
 	while (line[a] && (line[a] == ' ' || line[a] == '\t'))
 		a++;

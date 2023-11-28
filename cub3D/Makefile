@@ -6,7 +6,7 @@
 #    By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 14:36:25 by dcandan           #+#    #+#              #
-#    Updated: 2023/11/27 14:41:59 by dcandan          ###   ########.fr        #
+#    Updated: 2023/11/27 17:05:13 by dcandan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,21 +21,19 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 LIBFT_LIB = inc/libft/libft.a
 INC_DIR = inc/
-MLX42 = ../Cube3D/MLX42/build/libmlx42.a
+MLX42 = ../cub3D/MLX42/build/libmlx42.a
 #MLXSRC = -Iinclude -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.8/lib/"
-MLXSRC = -Iinclude -lglfw -L"/Users/aabel/.brew/opt/glfw/lib/"
-
-CFLAGS = -Wall -Wextra -Werror 
+MLXSRC = -Iinclude -lglfw -L"/Users/$USER/.brew/opt/glfw/lib/"
 MLXFLAG = -framework Cocoa -framework OpenGL -framework IOKit 
 
 all: ${NAME}
 
 %.o: %.c
-	$(CC) -c $(CFLAGS) -g3 $< -o $@ -I $(INC_DIR)
+	$(CC) -c $(CFLAGS) $< -o $@ -I $(INC_DIR)
 
 ${NAME}: ${OBJECTS}
 	make -C inc/libft
-	$(CC) $(CFLAGS) -g3 -o ${NAME} ${OBJECTS} $(MLX42) $(MLXSRC) ${LIBFT_LIB} -lm
+	$(CC) $(CFLAGS) -o ${NAME} ${OBJECTS} $(MLX42) $(MLXSRC) ${LIBFT_LIB} -lm
 
 clean:
 	make -C inc/libft clean

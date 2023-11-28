@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 14:27:58 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/24 17:00:45 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/27 17:09:36 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ int	ft_machin(t_map *g_map)
 		x[0] = -1;
 		x[1] = -1;
 		if (ft_space(g_map, x, &a, i) == -1)
-			return (ft_return_error("Error : Map is open"), -1);
+			return (ft_return_error("Error : Map is open"),
+				ft_free_intmap(g_map), -1);
 		i++;
 		a--;
 	}

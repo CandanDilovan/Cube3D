@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:36:50 by dcandan           #+#    #+#             */
-/*   Updated: 2023/11/27 14:49:05 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:55:43 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	map_count(t_map *g_map, char *map)
 	a = -1;
 	while (g_map->map[++a])
 	{
-		ft_printf("%s", g_map->map[a]);
 		if (ft_is_map(g_map->map[a], &flag) == -1)
 			return (ft_return_error("Error : unexpected char in map"),
 				ft_free_maps(g_map), -1);

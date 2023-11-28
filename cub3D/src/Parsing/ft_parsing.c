@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:46:09 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/24 16:32:10 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/27 17:06:29 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_no_void(t_map *g_map)
 			if (g_map->map[y][x] != '1' && flag == 1)
 				if (ft_check_holes(g_map, y, x) == -1)
 					return (ft_free_intmap(g_map),
-						ft_return_error("Error : map is open"));
+						ft_return_error("Error : map is open"), -1);
 			ft_check_spawn(g_map, x, y, &flag2);
 		}
 	}
