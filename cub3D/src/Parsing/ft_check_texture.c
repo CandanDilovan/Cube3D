@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_texture.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:44:11 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/27 14:24:50 by aabel            ###   ########.fr       */
+/*   Updated: 2023/11/28 14:05:24 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	ft_load_texture(t_map *g_map)
 {
+	ft_printf("\n\n%s\n", g_map->no);
 	g_map->texture->north = mlx_load_png(g_map->no);
 	if (!g_map->texture->north)
 		return (free(g_map->texture), ft_free_intmap(g_map), -1);

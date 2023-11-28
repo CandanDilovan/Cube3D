@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 06:56:57 by dilovancand       #+#    #+#             */
-/*   Updated: 2023/11/27 17:22:54 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/28 14:31:16 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,22 +88,27 @@ void	ft_identify_texture(t_map *g_map, char *line, int *flag)
 {
 	int	a;
 
-	//regler ici
 	a = 0;
 	while (line[a] && (line[a] == ' ' || line[a] == '\t'))
 		a++;
 	if (line[a] >= 33 && line[a] <= 126)
 		*flag += 1;
 	if (line[a] == 'N' && line[a + 1] == 'O')
-		g_map->no = ft_texture_path(line, (a + 2));
-	else if (line[a] == 'W' && line[a + 1] == 'E')
-		g_map->we = ft_texture_path(line, (a + 2));
-	else if (line[a] == 'S' && line[a + 1] == 'O')
-		g_map->so = ft_texture_path(line, (a + 2));
-	else if (line[a] == 'E' && line[a + 1] == 'A')
-		g_map->ea = ft_texture_path(line, (a + 2));
-	else if (line[a] == 'F')
-		g_map->f = ft_texture_path(line, (a + 1));
-	else if (line[a] == 'C')
-		g_map->c = ft_texture_path(line, (a + 1));
+		if (!g_map->no)
+			g_map->no = ft_texture_path(line, (a + 2));
+	if (line[a] == 'W' && line[a + 1] == 'E')
+		if (!g_map->we)
+			g_map->we = ft_texture_path(line, (a + 2));
+	if (line[a] == 'S' && line[a + 1] == 'O')
+		if (!g_map->so)
+			g_map->so = ft_texture_path(line, (a + 2));
+	if (line[a] == 'E' && line[a + 1] == 'A')
+		if (!g_map->ea)
+			g_map->ea = ft_texture_path(line, (a + 2));
+	if (line[a] == 'F')
+		if (!g_map->f)
+			g_map->f = ft_texture_path(line, (a + 2));
+	if (line[a] == 'C')
+		if (!g_map->c)
+			g_map->c = ft_texture_path(line, (a + 2));
 }

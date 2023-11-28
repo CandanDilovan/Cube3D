@@ -6,7 +6,7 @@
 /*   By: dcandan <dcandan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 14:09:02 by aabel             #+#    #+#             */
-/*   Updated: 2023/11/27 14:47:15 by dcandan          ###   ########.fr       */
+/*   Updated: 2023/11/28 14:29:25 by dcandan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ static int	ft_parsing_verif2(t_map *g_map, char *argv)
 	g_map->walls = malloc(sizeof(t_walls));
 	if (!g_map->walls)
 		return (free(g_map->player), free(g_map), -1);
+	g_map->no = NULL;
+	g_map->we = NULL;
+	g_map->ea = NULL;
+	g_map->so = NULL;
+	g_map->c = NULL;
+	g_map->f = NULL;
 	if (map_count(g_map, argv) == -1)
 		return (-1);
 	if (ft_int_map(g_map) == -1)
